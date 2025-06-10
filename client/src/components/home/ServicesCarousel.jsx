@@ -46,6 +46,16 @@ const services = [
   }
 ];
 
+const serviceLinks = [
+  '/services/platrerie',
+  '/services/peinture',
+  '/services/carrelage',
+  '/services/menuiserie',
+  '/services/cuisine',
+  '/services/revetement',
+  '/services/terrasse',
+];
+
 const ServicesCarousel = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -90,7 +100,12 @@ const ServicesCarousel = () => {
       <div className="services-scroll">
         <div className="scroll-container">
           {services.map((service, index) => (
-            <div key={index} className="service-card">
+            <a
+              key={index}
+              className="service-card"
+              href={serviceLinks[index]}
+              style={{ textDecoration: 'none', color: 'inherit' }}
+            >
               <div className="service-image">
                 <img src={service.image} alt={service.title} />
               </div>
@@ -98,7 +113,7 @@ const ServicesCarousel = () => {
                 <h3>{service.title}</h3>
                 <p>{service.description}</p>
               </div>
-            </div>
+            </a>
           ))}
         </div>
       </div>
@@ -109,10 +124,13 @@ const ServicesCarousel = () => {
     <div className="services-carousel">
       <div className="carousel-container">
         {services.map((service, index) => (
-          <div
+          <a
             key={index}
             className={`service-card ${index === currentIndex ? 'active' : ''}`}
+            href={serviceLinks[index]}
             style={{
+              textDecoration: 'none',
+              color: 'inherit',
               transform: `translateX(${(index - currentIndex) * 100}%)`
             }}
           >
@@ -123,7 +141,7 @@ const ServicesCarousel = () => {
               <h3>{service.title}</h3>
               <p>{service.description}</p>
             </div>
-          </div>
+          </a>
         ))}
       </div>
       <div className="carousel-controls">

@@ -31,7 +31,7 @@ const Platrerie = () => {
               <li>Conseils personnalisés pour optimiser votre confort et la durabilité de vos espaces.</li>
             </ul>
             <p>Nous intervenons aussi pour la rénovation de vos pièces et l'amélioration de votre habitat.</p>
-            <a href="/contact" className="contact-btn" style={{marginTop: '1.2rem'}}>
+            <a href="/contact" className="contact-btn" style={{marginTop: '1.2rem', textDecoration: 'none'}}>
               <i className="fas fa-envelope" style={{marginRight: '0.6em'}}></i>
               Contactez-nous
             </a>

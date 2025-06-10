@@ -204,8 +204,22 @@ const RealisationsPage = () => {
             onTouchEnd: handleTouchEnd
           } : {})}
         >
+          <button
+            className="lightbox-arrow lightbox-arrow-left"
+            onClick={() => setLightboxIndex((lightboxIndex - 1 + realisations.length) % realisations.length)}
+            aria-label="Précédent"
+          >
+            <i className="fas fa-chevron-left"></i>
+          </button>
           <div className="lightbox-content lightbox-content-large">
             <button className="lightbox-close" onClick={() => setLightboxIndex(null)}>&times;</button>
+            <button
+              className="lightbox-arrow lightbox-arrow-right"
+              onClick={() => setLightboxIndex((lightboxIndex + 1) % realisations.length)}
+              aria-label="Suivant"
+            >
+              <i className="fas fa-chevron-right"></i>
+            </button>
             <img src={realisations[lightboxIndex].imageUrl} alt={realisations[lightboxIndex].titre} className="lightbox-img" />
             <div className="lightbox-caption">
               <h3>{realisations[lightboxIndex].titre}</h3>

@@ -31,7 +31,7 @@ const Peinture = () => {
               <li>Conseils personnalisés sur le choix des couleurs et des matériaux.</li>
             </ul>
             <p>Nous utilisons des peintures professionnelles respectueuses de l'environnement et adaptées à chaque support.</p>
-            <a href="/contact" className="contact-btn" style={{marginTop: '1.2rem'}}>
+            <a href="/contact" className="contact-btn" style={{marginTop: '1.2rem', textDecoration: 'none'}}>
               <i className="fas fa-envelope" style={{marginRight: '0.6em'}}></i>
               Contactez-nous
             </a>

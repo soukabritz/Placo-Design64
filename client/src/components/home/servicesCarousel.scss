@@ -26,7 +26,8 @@
   background: $color-white;
   border-radius: $border-radius-lg;
   padding: $spacing-base;
-  box-shadow: $shadow-md;
+  box-shadow: none;
+  border: none;
 
   .service-image {
     height: 200px;

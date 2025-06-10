@@ -93,7 +93,7 @@
   justify-content: center;
 
   button {
-    padding: $spacing-base $spacing-lg;
+    padding: 0 $spacing-lg;
     font-size: $font-size-base;
     border: none;
     border-radius: 50px;
@@ -103,7 +103,25 @@
     display: flex;
     align-items: center;
     gap: $spacing-sm;
+    min-width: 220px;
+    justify-content: center;
+    height: 50px;
+    box-sizing: border-box;
   }
+}
+
+.hero-buttons .contact-btn,
+.hero-buttons .phone-btn {
+  margin: 0 !important;
+  width: 220px !important;
+  min-width: 220px !important;
+  max-width: 220px !important;
+  height: 50px !important;
+  padding: 0 32px !important;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .contact-btn {
@@ -117,15 +135,31 @@
   }
 }
 
-.phone-btn {
+a.phone-btn, button.phone-btn {
   background-color: transparent;
   color: $color-text-primary;
-  border: 2px solid $color-primary;
-
-  &:hover {
-    background-color: rgba($color-primary, 0.1);
-    transform: translateY(-2px);
-  }
+  border: none;
+  transition: $transition-base;
+  border-radius: 50px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 220px;
+  height: 50px;
+  box-sizing: border-box;
+  padding: 0 $spacing-lg;
+  font-size: $font-size-base;
+  gap: $spacing-sm;
+  cursor: pointer;
+  text-decoration: none;
+}
+a.phone-btn:hover, button.phone-btn:hover {
+  background-color: rgba($color-primary, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba($color-primary, 0.2);
+  color: $color-text-primary;
+  border: none;
 }
 
 @media (min-width: $breakpoint-md) {

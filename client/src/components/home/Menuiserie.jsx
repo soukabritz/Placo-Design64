@@ -31,7 +31,7 @@ const Menuiserie = () => {
               <li>Conseils personnalisés pour optimiser vos espaces.</li>
             </ul>
             <p>Nous travaillons avec des matériaux de qualité pour garantir la durabilité de vos aménagements.</p>
-            <a href="/contact" className="contact-btn" style={{marginTop: '1.2rem'}}>
+            <a href="/contact" className="contact-btn" style={{marginTop: '1.2rem', textDecoration: 'none'}}>
               <i className="fas fa-envelope" style={{marginRight: '0.6em'}}></i>
               Contactez-nous
             </a>

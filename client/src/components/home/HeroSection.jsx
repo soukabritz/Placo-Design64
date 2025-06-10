@@ -13,12 +13,12 @@ const HeroSection = () => {
           <h1>Créons l'intérieur parfait pour votre confort</h1>
           <p className="hero-description">Nous nous chargeons de tous les projets de rénovation.</p>
           <div className="hero-buttons">
-            <button className="contact-btn">
+            <a href="/contact" className="contact-btn">
               <i className="fas fa-envelope"></i> Contactez-nous
-            </button>
-            <button className="phone-btn">
+            </a>
+            <a href="tel:0665052999" className="phone-btn">
               <i className="fas fa-phone"></i> 06 65 05 29 99
-            </button>
+            </a>
           </div>
         </div>
         <ServicesCarousel />

@@ -170,6 +170,7 @@
   .footer-title, .footer-phrase {
     text-align: left !important;
     max-width: 420px;
+    white-space: normal !important;
   }
   .footer-bottom {
     margin-top: $spacing-base;
@@ -179,10 +180,8 @@
   }
   .footer-title {
     font-size: 1.7rem;
-    white-space: nowrap;
   }
   .footer-phrase {
-    white-space: nowrap;
   }
   .footer-links {
     align-items: flex-start;

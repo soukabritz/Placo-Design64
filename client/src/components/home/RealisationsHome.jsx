@@ -87,10 +87,6 @@ const RealisationsHome = () => {
                 <div className="slide-img-wrapper" onClick={() => setLightboxIndex(idx)} style={{cursor:'pointer'}}>
                   <img src={real.imageUrl} alt={real.titre} className="slide-img" />
                 </div>
-                <div className="slide-caption">
-                  <h3>{real.titre}</h3>
-                  {real.description && <p>{real.description}</p>}
-                </div>
               </div>
             ))}
           </div>

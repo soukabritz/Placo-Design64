@@ -33,6 +33,7 @@
 }
 
 .home-presentation {
+  background: #fff;
   max-width: 500px;
   width: 90vw;
   margin: 2rem auto 0 auto;
@@ -159,6 +160,15 @@
       object-fit: cover;
       box-shadow: none;
     }
+  }
+}
+
+@media (max-width: 767px) {
+  .home-presentation {
+    margin-top: 0.2rem;
+  }
+  .realisations-home-section {
+    margin-top: 1.5rem !important;
   }
 }
 

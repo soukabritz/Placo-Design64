@@ -31,7 +31,7 @@ const Revetement = () => {
               <li>Conseils sur le choix des matériaux et des finitions.</li>
             </ul>
             <p>Nous vous garantissons un résultat esthétique, durable et facile d'entretien.</p>
-            <a href="/contact" className="contact-btn" style={{marginTop: '1.2rem'}}>
+            <a href="/contact" className="contact-btn" style={{marginTop: '1.2rem', textDecoration: 'none'}}>
               <i className="fas fa-envelope" style={{marginRight: '0.6em'}}></i>
               Contactez-nous
             </a>

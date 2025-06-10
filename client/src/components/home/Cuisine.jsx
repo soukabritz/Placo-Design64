@@ -31,7 +31,7 @@ const Cuisine = () => {
               <li>Matériaux de qualité et finitions soignées.</li>
             </ul>
             <p>Nous vous accompagnons de la conception à la réalisation pour une cuisine qui vous ressemble.</p>
-            <a href="/contact" className="contact-btn" style={{marginTop: '1.2rem'}}>
+            <a href="/contact" className="contact-btn" style={{marginTop: '1.2rem', textDecoration: 'none'}}>
               <i className="fas fa-envelope" style={{marginRight: '0.6em'}}></i>
               Contactez-nous
             </a>
