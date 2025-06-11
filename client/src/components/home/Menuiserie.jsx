@@ -1,6 +1,6 @@
 import React from 'react';
 import './servicePage.scss';
-import menuiserieImg from '../../assets/menuiserie.jpg';
+import menuiserieImgWebp from '../../assets/menuiserie.webp';
 
 const Menuiserie = () => {
   return (
@@ -37,7 +37,9 @@ const Menuiserie = () => {
             </a>
           </div>
           <div className="service-main-img">
-            <img src={menuiserieImg} alt="Travaux de menuiserie" />
+            <picture>
+              <img src={menuiserieImgWebp} alt="Travaux de menuiserie Placo Design 64" width="400" height="300" />
+            </picture>
           </div>
         </section>
 

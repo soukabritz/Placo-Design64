@@ -1,6 +1,6 @@
 import React from 'react';
 import './servicePage.scss';
-import terrasseImg from '../../assets/terrasse.jpg';
+import terrasseImg from '../../assets/terrasse.webp';
 
 const Terrasse = () => {
   return (
@@ -37,7 +37,9 @@ const Terrasse = () => {
             </a>
           </div>
           <div className="service-main-img">
-            <img src={terrasseImg} alt="Terrasse bois et composite" />
+            <picture>
+              <img src={terrasseImg} alt="Terrasse bois Placo Design 64" width="400" height="300" />
+            </picture>
           </div>
         </section>
 

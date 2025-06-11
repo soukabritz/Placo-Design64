@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './servicesCarousel.scss';
-import platrerie from '../../assets/platrerie.jpg';
-import peinture from '../../assets/peinture.jpg';
-import carrelage from '../../assets/carrelage.jpg';
-import menuiserie from '../../assets/menuiserie.jpg';
-import cuisine from '../../assets/cuisine.jpg';
+import platrerie from '../../assets/platrerie.webp';
+import peinture from '../../assets/peinture.webp';
+import carrelage from '../../assets/carrelage.webp';
+import menuiserie from '../../assets/menuiserie.webp';
+import cuisine from '../../assets/cuisine.webp';
 import revetement from '../../assets/revetement.webp';
-import terrasse from '../../assets/terrasse.jpg';
+import terrasse from '../../assets/terrasse.webp';
 
 const services = [
   {
@@ -154,6 +154,7 @@ const ServicesCarousel = () => {
               key={index}
               className={`dot ${index === currentIndex ? 'active' : ''}`}
               onClick={() => handleDotClick(index)}
+              aria-label={`Aller à la slide ${index + 1}`}
             />
           ))}
         </div>

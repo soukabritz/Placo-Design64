@@ -6,6 +6,7 @@ const cors = require('cors');
 const adminRoutes = require('./routes/adminRoutes');
 const contactRoutes = require('./routes/contactRoutes');
 const realisationRoutes = require('./routes/realisationRoutes');
+const compression = require('compression');
 
 const app = express();
 
@@ -15,6 +16,7 @@ dotenv.config();
 // middlewares
 app.use(express.json());
 app.use(cookieParser());
+app.use(compression());
 
 // configuration CORS
 app.use(cors({
@@ -24,11 +26,13 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
 }));
 
-// headers de sécurité
+// Headers de sécurité HTTP (CSP, HSTS, COOP, X-Frame-Options)
 app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Credentials', 'true');
-    res.header('Content-Security-Policy', "frame-ancestors 'self' https://www.google.com");
-    next();
+  res.setHeader("Content-Security-Policy", "default-src 'self'; img-src 'self' https: data:; script-src 'self' https://www.google.com https://www.gstatic.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com;");
+  res.setHeader("Strict-Transport-Security", "max-age=63072000; includeSubDomains; preload");
+  res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
+  res.setHeader("X-Frame-Options", "SAMEORIGIN");
+  next();
 });
 
 // connexion à la base de données
@@ -43,6 +47,10 @@ app.use('/api/realisations', realisationRoutes);
 app.use((req, res) => {
     res.status(404).json({ message: "Route non trouvée" });
 });
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build', { maxAge: '1y' }));
+}
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {

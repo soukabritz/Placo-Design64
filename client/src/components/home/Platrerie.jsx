@@ -1,6 +1,6 @@
 import React from 'react';
 import './servicePage.scss';
-import platrerieImg from '../../assets/platrerie.jpg'; // Mets ici le chemin de ton image
+import platrerieImgWebp from '../../assets/platrerie.webp';
 
 const Platrerie = () => {
   return (
@@ -37,7 +37,9 @@ const Platrerie = () => {
             </a>
           </div>
           <div className="service-main-img">
-            <img src={platrerieImg} alt="Travaux de plâtrerie" />
+            <picture>
+              <img src={platrerieImgWebp} alt="Travaux de plâtrerie Placo Design 64" width="400" height="300" />
+            </picture>
           </div>
         </section>
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import './heroSection.scss';
-import heroBg from '../../assets/home-bg2.jpg';
+import heroBg from '../../assets/home-bg2.webp';
 import ServicesCarousel from './ServicesCarousel';
 
 const HeroSection = () => {

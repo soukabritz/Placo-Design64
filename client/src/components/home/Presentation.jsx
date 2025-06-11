@@ -1,5 +1,5 @@
 import React from 'react';
-import heroImg from '../../assets/hero-image.jpg'; // Mets ici le bon chemin vers ton image
+import heroImgWebp from '../../assets/hero-image.webp';
 
 const Presentation = () => (
   <section className="home-presentation">
@@ -31,7 +31,9 @@ const Presentation = () => (
       </a>
     </div>
     <div className="presentation-image">
-      <img src={heroImg} alt="Réalisation Placo Design 64" />
+      <picture>
+        <img src={heroImgWebp} alt="Réalisation Placo Design 64" width="420" height="320" />
+      </picture>
     </div>
   </section>
 );

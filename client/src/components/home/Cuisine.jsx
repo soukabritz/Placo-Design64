@@ -1,6 +1,6 @@
 import React from 'react';
 import './servicePage.scss';
-import cuisineImg from '../../assets/cuisine.jpg';
+import cuisineImgWebp from '../../assets/cuisine.webp';
 
 const Cuisine = () => {
   return (
@@ -37,7 +37,9 @@ const Cuisine = () => {
             </a>
           </div>
           <div className="service-main-img">
-            <img src={cuisineImg} alt="Installation de cuisine" />
+            <picture>
+              <img src={cuisineImgWebp} alt="Cuisine sur mesure Placo Design 64" width="400" height="300" />
+            </picture>
           </div>
         </section>
 

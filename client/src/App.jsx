@@ -1,3 +1,4 @@
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './authContext';
 import Navbar from './components/navigation/Navbar';
@@ -16,7 +17,44 @@ import Cuisine from './components/home/Cuisine';
 import Revetement from './components/home/Revetement';
 import Terrasse from './components/home/Terrasse';
 
-function App() {
+const App = () => {
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Placo Design 64",
+    "image": "https://placodesign64.fr/logo.png",
+    "description": "Entreprise de rénovation et construction au Pays Basque. Spécialiste en plâtrerie, peinture, carrelage et menuiserie.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressRegion": "Pays Basque",
+      "addressCountry": "FR"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "43.4833",
+      "longitude": "-1.4833"
+    },
+    "url": "https://placodesign64.fr",
+    "telephone": "+33665052999",
+    "priceRange": "€€",
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "opens": "08:00",
+      "closes": "18:00"
+    },
+    "sameAs": [
+      "https://www.facebook.com/placodesign64",
+      "https://www.instagram.com/placodesign64"
+    ]
+  };
+
   return (
     <AuthProvider>
       <Router>
@@ -39,8 +77,11 @@ function App() {
         </main>
         <Footer />
       </Router>
+      <script type="application/ld+json">
+        {JSON.stringify(organizationSchema)}
+      </script>
     </AuthProvider>
   );
-}
+};
 
 export default App;

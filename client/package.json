@@ -15,7 +15,8 @@
     "react-google-recaptcha": "^3.1.0",
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.6.2",
-    "tarteaucitronjs": "^1.21.0"
+    "tarteaucitronjs": "^1.21.0",
+    "sharp": "^0.33.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",

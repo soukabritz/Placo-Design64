@@ -1,6 +1,6 @@
 import React from 'react';
 import './servicePage.scss';
-import revetementImg from '../../assets/revetement.webp';
+import revetementImgWebp from '../../assets/revetement.webp';
 
 const Revetement = () => {
   return (
@@ -37,7 +37,9 @@ const Revetement = () => {
             </a>
           </div>
           <div className="service-main-img">
-            <img src={revetementImg} alt="Pose de revêtements" />
+            <picture>
+              <img src={revetementImgWebp} alt="Pose de revêtements Placo Design 64" width="400" height="300" />
+            </picture>
           </div>
         </section>
 

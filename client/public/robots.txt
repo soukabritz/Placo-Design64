@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://placodesign64.fr/sitemap.xml 

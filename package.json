@@ -11,6 +11,7 @@
     "bcrypt": "^5.1.1",
     "bcryptjs": "^3.0.2",
     "cloudinary": "^1.41.3",
+    "compression": "^1.8.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dotenv": "^16.4.1",
@@ -27,12 +28,16 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^7.6.2",
     "react-scripts": "5.0.1",
+    "sharp": "^0.34.2",
     "tarteaucitronjs": "^1.21.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "node server.js",
+    "build": "cd client && npm install && npm run build",
+    "dev": "nodemon server.js",
+    "client": "cd client && npm start",
+    "dev:full": "concurrently \"npm run dev\" \"npm run client\"",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "server": "node app.js"
