@@ -16,7 +16,7 @@ router.get('/home', realisationController.getFeaturedRealisations);
 router.post('/', requireAuth, upload.single('image'), realisationValidation, validateRequest, realisationController.createRealisation);
 
 // modifier une realisation (quez admin )
-router.put('/:id', requireAuth, realisationValidation, validateRequest, realisationController.updateRealisation);
+router.put('/:id', requireAuth, upload.single('image'), realisationValidation, validateRequest, realisationController.updateRealisation);
 
 // supprimer une realisation (que admin )
 router.delete('/:id', requireAuth, realisationController.deleteRealisation);

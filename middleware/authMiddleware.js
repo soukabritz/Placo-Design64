@@ -3,22 +3,27 @@ const Admin = require("../src/models/Admin");
 
 exports.requireAuth = async (req, res, next) => {
   try {
-    // verifie le token dans le cookie
-    const token = req.cookies.token;
+    // double verification du token header authorization ou cookie
+    let token;
+    if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+      token = req.headers.authorization.split(' ')[1];
+    } else if (req.cookies.token) {
+      token = req.cookies.token;
+    }
     if (!token) {
       return res.status(401).json({ message: "Non autorisé - Token manquant" });
     }
 
-    // verifie et decode le token
+    // verifie et décode le token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     
-    // verifie si ladmin existe toujours
+    // verifie si l'admin existe toujours
     const admin = await Admin.findById(decoded.id);
     if (!admin) {
       return res.status(401).json({ message: "Non autorisé - Admin non trouvé" });
     }
 
-    // ajout de ladmin a la requete
+    // ajoute l'admin à la requête
     req.admin = admin;
     next();
   } catch (error) {

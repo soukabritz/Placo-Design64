@@ -39,7 +39,7 @@ const RealisationsHome = () => {
   useEffect(() => {
     const fetchRealisations = async () => {
       try {
-        const res = await fetch('http://localhost:3001/api/realisations?showOnHome=true');
+        const res = await fetch('http://localhost:3001/api/realisations/home');
         const data = await res.json();
         setRealisations(data);
       } catch {
@@ -124,7 +124,7 @@ const RealisationsHome = () => {
       <div className="realisations-home-wrapper">
         <h2 className="realisations-home-title">Nos réalisations</h2>
         <div className="realisations-grid">
-          {realisations.slice(0, 6).map((real, idx) => (
+          {realisations.map((real, idx) => (
             <div key={real._id} className="grid-item">
               <div className="slide-img-wrapper" onClick={() => setLightboxIndex(idx)} style={{cursor:'pointer'}}>
                 <picture>

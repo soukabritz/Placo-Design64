@@ -28,21 +28,21 @@ exports.login = async (req, res) => {
       return res.status(400).json({ message: "Erreur lors de la vérification reCAPTCHA" });
     }
 
-    // on vérifie si l'admin existe
+    // on verifie si l'admin existe
     const admin = await Admin.findOne({ email });
     
     if (!admin) {
       return res.status(401).json({ message: "Email ou mot de passe incorrect" });
     }
 
-    // on vérifie le mot de passe
+    // on verifie le mot de passe
     const isValidPassword = await admin.comparePassword(password);
 
     if (!isValidPassword) {
       return res.status(401).json({ message: "Email ou mot de passe incorrect" });
     }
 
-    // on crée le token
+    // on cree le token
     const token = jwt.sign(
       { id: admin._id },
       process.env.JWT_SECRET,

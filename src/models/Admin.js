@@ -13,7 +13,7 @@ const adminSchema = new mongoose.Schema({
   }
 });
 
-// la methode pour vérifier le mot de passe
+// verifier le mot de passe
 adminSchema.methods.comparePassword = async function(candidatePassword) {
   try {
     return await bcrypt.compare(candidatePassword, this.password);
@@ -22,5 +22,17 @@ adminSchema.methods.comparePassword = async function(candidatePassword) {
     throw error;
   }
 };
+
+// hacher le mot de passe avant sauvegarde
+adminSchema.pre('save', async function(next) {
+  if (!this.isModified('password')) return next();
+  try {
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+    next();
+  } catch (err) {
+    next(err);
+  }
+});
 
 module.exports = mongoose.model('Admin', adminSchema); 

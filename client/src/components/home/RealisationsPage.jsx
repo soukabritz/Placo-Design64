@@ -92,19 +92,38 @@ const RealisationsPage = () => {
   const handleEditSubmit = async (formData) => {
     setIsLoading(true);
     setError('');
-    const data = new FormData();
-    data.append('titre', formData.titre);
-    data.append('description', formData.description);
-    data.append('showOnHome', formData.showOnHome);
-    if (formData.image) {
-      data.append('image', formData.image);
-    }
+
     try {
-      const res = await fetch(`http://localhost:3001/api/realisations/${editReal._id}`, {
-        method: 'PUT',
-        credentials: 'include',
-        body: data
-      });
+      let res;
+      // Si une nouvelle image est fournie, on envoie en FormData
+      if (formData.image) {
+        const data = new FormData();
+        data.append('titre', formData.titre);
+        data.append('description', formData.description);
+        data.append('showOnHome', formData.showOnHome);
+        data.append('image', formData.image);
+
+        res = await fetch(`http://localhost:3001/api/realisations/${editReal._id}`, {
+          method: 'PUT',
+          credentials: 'include',
+          body: data,
+        });
+      } else {
+        // Sinon, on envoie en JSON
+        res = await fetch(`http://localhost:3001/api/realisations/${editReal._id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+          body: JSON.stringify({
+            titre: formData.titre,
+            description: formData.description,
+            showOnHome: formData.showOnHome,
+          }),
+        });
+      }
+
       if (!res.ok) {
         const errData = await res.json();
         setError(errData.message || 'Erreur lors de la modification');
