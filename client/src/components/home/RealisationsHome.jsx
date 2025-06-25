@@ -87,7 +87,7 @@ const RealisationsHome = () => {
                 <div className="slide-img-wrapper" onClick={() => setLightboxIndex(idx)} style={{cursor:'pointer'}}>
                   <picture>
                     <source srcSet={real.imageUrl.replace(/\.(jpg|jpeg|png)$/i, '.webp')} type="image/webp" />
-                    <img src={real.imageUrl} alt={real.titre || 'Réalisation Placo Design 64'} className="slide-img" width="400" height="400" />
+                    <img src={real.imageUrl} alt={real.titre || 'Réalisation Placo Design 64'} className="slide-img" width="400" height="400" loading="lazy" />
                   </picture>
                 </div>
               </div>
@@ -105,7 +105,7 @@ const RealisationsHome = () => {
               <button className="lightbox-close" onClick={() => setLightboxIndex(null)}>&times;</button>
               <picture>
                 <source srcSet={realisations[lightboxIndex].imageUrl.replace(/\.(jpg|jpeg|png)$/i, '.webp')} type="image/webp" />
-                <img src={realisations[lightboxIndex].imageUrl} alt={realisations[lightboxIndex].titre || 'Réalisation Placo Design 64'} className="lightbox-img" width="800" height="600" />
+                <img src={realisations[lightboxIndex].imageUrl} alt={realisations[lightboxIndex].titre || 'Réalisation Placo Design 64'} className="lightbox-img" width="800" height="600" loading="lazy" />
               </picture>
               <div className="lightbox-caption">
                 <h3>{realisations[lightboxIndex].titre}</h3>
@@ -129,7 +129,7 @@ const RealisationsHome = () => {
               <div className="slide-img-wrapper" onClick={() => setLightboxIndex(idx)} style={{cursor:'pointer'}}>
                 <picture>
                   <source srcSet={real.imageUrl.replace(/\.(jpg|jpeg|png)$/i, '.webp')} type="image/webp" />
-                  <img src={real.imageUrl} alt={real.titre || 'Réalisation Placo Design 64'} className="grid-img" width="400" height="400" />
+                  <img src={real.imageUrl} alt={real.titre || 'Réalisation Placo Design 64'} className="grid-img" width="400" height="400" loading="lazy" />
                 </picture>
               </div>
             </div>
@@ -155,7 +155,7 @@ const RealisationsHome = () => {
               </button>
               <picture>
                 <source srcSet={realisations[lightboxIndex].imageUrl.replace(/\.(jpg|jpeg|png)$/i, '.webp')} type="image/webp" />
-                <img src={realisations[lightboxIndex].imageUrl} alt={realisations[lightboxIndex].titre || 'Réalisation Placo Design 64'} className="lightbox-img" width="800" height="600" />
+                <img src={realisations[lightboxIndex].imageUrl} alt={realisations[lightboxIndex].titre || 'Réalisation Placo Design 64'} className="lightbox-img" width="800" height="600" loading="lazy" />
               </picture>
               <div className="lightbox-caption">
                 <h3>{realisations[lightboxIndex].titre}</h3>

@@ -6,7 +6,6 @@ import Login from './components/login/Login';
 import Home from './components/home/home';
 import PolitiqueConfidentialite from './components/legal/PolitiqueConfidentialite';
 import ConditionsUtilisation from './components/legal/ConditionsUtilisation';
-import PrivateRoute from './components/privateRoute';
 import ContactPage from './components/home/ContactPage';
 import Footer from './components/navigation/Footer';
 import RealisationsPage from './components/home/RealisationsPage';

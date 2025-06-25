@@ -16,7 +16,8 @@ const errorHandler = (err, req, res, next) => {
         success : false,
         message,
         code : errorCode,
-        stack : err.stack,
+        // On n'envoie la stack que si on n'est pas en production
+        stack: process.env.NODE_ENV === 'production' ? '🥞' : err.stack,
     })
     }
     

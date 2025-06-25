@@ -7,6 +7,7 @@ const adminRoutes = require('./routes/adminRoutes');
 const contactRoutes = require('./routes/contactRoutes');
 const realisationRoutes = require('./routes/realisationRoutes');
 const compression = require('compression');
+const errorHandler = require('./middleware/errorHandler');
 
 const app = express();
 
@@ -47,6 +48,8 @@ app.use('/api/realisations', realisationRoutes);
 app.use((req, res) => {
     res.status(404).json({ message: "Route non trouvée" });
 });
+
+app.use(errorHandler);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build', { maxAge: '1y' }));

@@ -13,7 +13,7 @@ const Footer = () => {
     <footer className="footer">
       <div className="footer-content">
         <div className="footer-col footer-col-left">
-          <img src={logo} alt="Logo Placo Design 64" className="footer-logo" />
+          <img src={logo} alt="Logo Placo Design 64" className="footer-logo" loading="lazy" />
           <div className="footer-info">
             <a href="tel:0665052999" className="footer-phone">
               <FaPhoneAlt style={{ marginRight: '0.5em', verticalAlign: 'middle' }} />
