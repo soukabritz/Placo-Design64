@@ -1,0 +1,161 @@
+@use "variables" as *;
+
+.services-carousel {
+  flex: 1;
+  width: 100%;
+  max-width: 450px;
+  position: relative;
+  overflow: hidden;
+  border-radius: $border-radius-lg;
+  box-shadow: $shadow-lg;
+  background-color: $color-white;
+  display: flex;
+  flex-direction: column;
+
+  .carousel-container {
+    position: relative;
+    height: 400px;
+    width: 100%;
+  }
+
+  .service-card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.5s ease-in-out;
+    background-color: $color-white;
+
+    .service-image {
+      height: 250px;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+    }
+
+    &:hover .service-image img {
+      transform: scale(1.05);
+    }
+
+    .service-content {
+      flex: 1;
+      padding: $spacing-base;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      h3 {
+        color: $color-text-primary;
+        margin-bottom: $spacing-xs;
+        font-size: $font-size-lg;
+        font-family: $font-family-primary;
+      }
+
+      p {
+        color: $color-text-light;
+        font-size: $font-size-sm;
+        line-height: 1.4;
+      }
+    }
+  }
+
+  .carousel-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $spacing-sm $spacing-base;
+    background-color: $color-gray-light;
+
+    .carousel-button {
+      background: none;
+      border: none;
+      font-size: $font-size-xl;
+      color: $color-text-light;
+      cursor: pointer;
+      padding: $spacing-xs;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: $color-primary;
+      }
+    }
+
+    .carousel-dots {
+      display: flex;
+      gap: $spacing-sm;
+
+      .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: $color-gray;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &.active {
+          background-color: $color-primary;
+          transform: scale(1.2);
+        }
+      }
+    }
+  }
+}
+
+// Version mobile (scroll horizontal fluide)
+.services-scroll {
+  width: 100%;
+  overflow-x: auto;
+  padding: $spacing-sm 0;
+  -webkit-overflow-scrolling: touch;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scroll-container {
+    display: flex;
+    gap: $spacing-base;
+    padding: 0 $spacing-base;
+  }
+
+  .service-card {
+    min-width: 280px;
+    background-color: $color-white;
+    border-radius: $border-radius-md;
+    box-shadow: $shadow-md;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+
+    .service-image {
+      height: 180px;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .service-content {
+      padding: $spacing-base;
+      h3 {
+        font-size: $font-size-base;
+        margin-bottom: $spacing-xs;
+        color: $color-text-primary;
+      }
+      p {
+        font-size: $font-size-xs;
+        color: $color-text-light;
+      }
+    }
+  }
+}

@@ -1,0 +1,141 @@
+@use "variables" as *;
+
+.home-page {
+  width: 100%;
+  overflow-x: hidden;
+  background-color: $color-gray-light;
+}
+
+.home-title-block {
+  padding: $spacing-xl $spacing-base;
+  text-align: center;
+  background-color: $color-white;
+  margin-top: $spacing-lg;
+
+  h1 {
+    font-size: $font-size-2xl;
+    color: $color-text-primary;
+    margin-bottom: $spacing-base;
+    line-height: 1.2;
+    font-family: $font-family-primary;
+  }
+
+  .home-subtitle {
+    font-size: $font-size-base;
+    color: $color-text-light;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+}
+
+// Styles pour la section de présentation
+.home-presentation {
+  padding: $spacing-lg 0;
+  background-color: $color-white;
+
+  .presentation-flex {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: $spacing-lg;
+  }
+
+  .presentation-text {
+    flex: 1;
+
+    h2 {
+      font-size: $font-size-xl;
+      color: $color-text-primary;
+      margin-bottom: $spacing-base;
+      font-family: $font-family-primary;
+    }
+
+    p {
+      color: $color-text-light;
+      line-height: 1.6;
+      margin-bottom: $spacing-sm;
+    }
+
+    ul {
+      margin: $spacing-base 0;
+      padding-left: $spacing-base;
+      list-style-type: none;
+
+      li {
+        position: relative;
+        padding-left: $spacing-lg;
+        margin-bottom: $spacing-sm;
+        color: $color-text-light;
+
+        &::before {
+          content: "✓";
+          position: absolute;
+          left: 0;
+          color: $color-primary;
+          font-weight: bold;
+        }
+      }
+    }
+
+    .contact-btn {
+      display: inline-block;
+      margin-top: $spacing-base;
+      padding: $spacing-base $spacing-lg;
+      background-color: $color-primary;
+      color: $color-white;
+      border-radius: $border-radius-sm;
+      font-weight: 600;
+      transition: $transition-base;
+
+      &:hover {
+        background-color: $color-primary-dark;
+      }
+    }
+  }
+
+  .presentation-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      width: 100%;
+      height: auto;
+      max-width: 500px;
+      border-radius: $border-radius-md;
+      box-shadow: $shadow-md;
+    }
+  }
+}
+
+@media (min-width: $breakpoint-md) {
+  .home-title-block {
+    padding: $spacing-2xl $spacing-xl;
+    margin-top: 0;
+
+    h1 {
+      font-size: $font-size-3xl;
+    }
+
+    .home-subtitle {
+      font-size: $font-size-lg;
+    }
+  }
+
+  .home-presentation {
+    padding: $spacing-2xl 0;
+
+    .presentation-flex {
+      flex-direction: row;
+      gap: $spacing-2xl;
+      align-items: center;
+    }
+
+    .presentation-text {
+      h2 {
+        font-size: $font-size-2xl;
+      }
+    }
+  }
+}

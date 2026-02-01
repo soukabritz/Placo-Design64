@@ -1,0 +1,348 @@
+@use "variables" as *;
+
+// mixins pour réutiliser les styles dbase
+@mixin navbar-base {
+  position: fixed;
+  left: 0;
+  right: 0;
+  background-color: $color-white;
+  display: flex;
+  z-index: 1000;
+}
+
+.top-navbar {
+  @include navbar-base;
+  top: 0;
+  height: $navbar-height;
+  box-shadow: $shadow-sm;
+
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+}
+
+.bottom-navbar {
+  @include navbar-base;
+  bottom: 0;
+  height: $navbar-height-mobile;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+
+  .container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    height: 100%;
+    width: 100%;
+    padding: 0;
+  }
+}
+
+.desktop-navbar {
+  display: none; // Caché par défaut sur mobile
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: $color-text-light;
+  text-decoration: none;
+  font-size: $font-size-sm;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: $spacing-sm 0;
+
+  svg {
+    font-size: $font-size-xl;
+    margin-bottom: 4px;
+  }
+
+  span {
+    font-size: $font-size-xs;
+    text-align: center;
+  }
+}
+
+.logo {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+
+  img {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+    max-width: none;
+  }
+}
+
+// Styles pour le menu mobile
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1001;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 80%;
+  max-width: 300px;
+  background-color: $color-white;
+  padding: $spacing-lg;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-base;
+  animation: slideInLeft 0.3s ease-in-out;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+
+  .close-menu-btn {
+    position: absolute;
+    top: $spacing-base;
+    right: $spacing-base;
+    background: none;
+    border: none;
+    color: $color-text-light;
+    font-size: $font-size-xl;
+    cursor: pointer;
+    padding: $spacing-xs;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: $transition-base;
+
+    &:hover {
+      color: $color-primary;
+      transform: rotate(90deg);
+    }
+  }
+
+  a,
+  button {
+    color: $color-text-primary;
+    text-decoration: none;
+    font-size: $font-size-lg;
+    font-weight: 500;
+    padding: $spacing-sm 0;
+    border: none;
+    background: none;
+    text-align: left;
+    cursor: pointer;
+    transition: $transition-base;
+    border-bottom: 1px solid rgba($color-text-light, 0.1);
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
+
+  button {
+    color: $color-primary;
+    font-weight: 600;
+    margin-top: auto;
+    border-bottom: none;
+  }
+}
+
+// Styles pour le menu déroulant des services
+.services-dropdown {
+  position: relative;
+
+  .services-toggle {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    cursor: pointer;
+
+    svg {
+      font-size: $font-size-sm;
+      transition: transform 0.3s ease;
+    }
+  }
+
+  &.mobile {
+    .services-toggle {
+      color: $color-text-primary;
+      font-size: $font-size-lg;
+      font-weight: 500;
+      padding: $spacing-sm 0;
+      border-bottom: 1px solid rgba($color-text-light, 0.1);
+    }
+
+    .services-list {
+      padding-left: $spacing-base;
+      margin-top: $spacing-xs;
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-xs;
+      animation: slideDown 0.3s ease-in-out;
+    }
+  }
+
+  &.desktop {
+    .services-list {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: $color-white;
+      min-width: 200px;
+      border-radius: $border-radius-sm;
+      box-shadow: $shadow-md;
+      padding: $spacing-sm 0;
+      margin-top: $spacing-xs;
+      animation: fadeInDown 0.3s ease-in-out;
+      z-index: 1002;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: -8px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-bottom: 8px solid $color-white;
+      }
+    }
+  }
+}
+
+.services-dropdown.desktop .services-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 180px;
+  max-width: 240px;
+  white-space: nowrap;
+}
+
+.services-dropdown.desktop .services-list .nav-link {
+  width: 100%;
+  padding: $spacing-sm $spacing-lg;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -10px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+@media (min-width: $breakpoint-md) {
+  .top-navbar,
+  .bottom-navbar {
+    display: none; // Cache les barres de navigation mobile
+  }
+
+  .desktop-navbar {
+    @include navbar-base;
+    display: flex;
+    top: 0;
+    height: $navbar-height;
+    box-shadow: $shadow-sm;
+
+    .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100%;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-right {
+      display: flex;
+      gap: $spacing-lg;
+      align-items: center;
+    }
+  }
+
+  .nav-link {
+    color: $color-text-light;
+    text-decoration: none;
+    font-size: $font-size-base;
+    font-weight: 500;
+    transition: $transition-fast;
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
+
+  .logout-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font: inherit;
+    color: $color-text-light;
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
+}
+
+main {
+  padding-top: $navbar-height-mobile;
+  padding-bottom: $navbar-height-mobile;
+
+  @media (min-width: $breakpoint-md) {
+    padding-top: $navbar-height;
+    padding-bottom: 0;
+  }
+}

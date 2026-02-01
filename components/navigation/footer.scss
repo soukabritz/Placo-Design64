@@ -1,0 +1,202 @@
+@use "variables" as *;
+
+.footer {
+  background: $color-white;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.06);
+  padding: $spacing-lg;
+  margin-top: $spacing-lg;
+  font-family: $font-family-primary;
+  position: relative;
+}
+
+.footer-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-lg;
+  padding: 0 0 $spacing-lg 0;
+}
+
+.footer-col {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-xs;
+}
+
+.footer-logo {
+  height: 90px;
+  width: auto;
+  object-fit: contain;
+  margin-bottom: 0.3rem;
+}
+
+.footer-info {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  align-items: center;
+}
+
+.footer-phone {
+  color: $color-text-primary;
+  font-size: $font-size-base;
+  font-weight: 600;
+  text-decoration: underline;
+  margin-bottom: $spacing-xs;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  margin-top: 0.7rem;
+  &:hover {
+    color: $color-primary;
+    text-decoration: underline;
+  }
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  align-items: center;
+  a {
+    color: $color-text-primary;
+    text-decoration: none;
+    font-size: $font-size-base;
+    font-weight: 500;
+    transition: $transition-fast;
+    &:hover {
+      color: $color-primary;
+      text-decoration: underline;
+      text-decoration-color: $color-primary;
+      text-decoration-thickness: 2px;
+    }
+  }
+}
+
+.footer-title {
+  color: $color-text-primary;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0 0 $spacing-xs 0;
+  text-align: center;
+  font-family: $font-family-primary;
+  max-width: 95vw;
+  white-space: normal;
+  line-height: 1.2;
+}
+
+.footer-phrase {
+  color: $color-text-light;
+  font-size: $font-size-base;
+  margin: 0 0 $spacing-base 0;
+  text-align: center;
+}
+
+.footer-contact-btn {
+  background: $color-primary;
+  color: $color-white;
+  border: none;
+  border-radius: 50px;
+  padding: $spacing-base $spacing-lg;
+  font-size: $font-size-base;
+  font-weight: 600;
+  text-decoration: none;
+  transition: $transition-base;
+  margin-top: 0;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba($color-primary, 0.15);
+  display: inline-block;
+  &:hover {
+    background: $color-primary-dark;
+    color: $color-white;
+    transform: translateY(-2px);
+  }
+}
+
+.footer-bottom {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-base;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  p {
+    margin: 0;
+    font-size: $font-size-sm;
+    color: $color-text-light;
+  }
+}
+
+.footer-top-btn {
+  background: none;
+  color: $color-text-primary;
+  border: 1.5px solid $color-primary;
+  border-radius: $border-radius-sm;
+  padding: $spacing-base $spacing-lg;
+  font-size: $font-size-base;
+  font-weight: 600;
+  text-decoration: underline;
+  transition: $transition-base;
+  margin: 1rem 0 0 0;
+  cursor: pointer;
+  box-shadow: none;
+  &:hover {
+    background: $color-gray-light;
+    color: $color-primary;
+  }
+}
+
+// Version desktop
+@media (min-width: $breakpoint-md) {
+  .footer-content {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: $spacing-xl;
+    padding: 0 0 $spacing-xl 0;
+  }
+  .footer-col,
+  .footer-col-center,
+  .footer-col-right {
+    align-items: flex-start !important;
+    text-align: left !important;
+    width: auto;
+  }
+  .footer-title,
+  .footer-phrase {
+    text-align: left !important;
+    max-width: 420px;
+    white-space: normal !important;
+  }
+  .footer-bottom {
+    margin-top: $spacing-base;
+  }
+  .footer-logo {
+    height: 95px;
+  }
+  .footer-title {
+    font-size: 1.7rem;
+  }
+  .footer-links {
+    align-items: flex-start;
+  }
+  .footer-top-btn {
+    margin-top: 2.5rem;
+  }
+  .footer-bottom {
+    margin-bottom: 2.5rem;
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  .footer {
+    padding-bottom: 70px;
+  }
+}
