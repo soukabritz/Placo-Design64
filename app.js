@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require("path");
 const connectDB = require("./config/database");
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
@@ -13,14 +14,17 @@ const app = express();
 // charger les vbs d'environnement en premier
 dotenv.config();
 
+const isProduction = process.env.NODE_ENV === 'production';
+const corsOrigin = process.env.CORS_ORIGIN || (isProduction ? undefined : 'http://localhost:5173');
+
 // middlewares
 app.use(express.json());
 app.use(cookieParser());
 app.use(compression());
 
-// configuration CORS
+// configuration CORS (en prod : CORS_ORIGIN ou same-origin si front servi par ce serveur)
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: corsOrigin || true, // true = refléter l'origine de la requête (same-origin)
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
@@ -38,18 +42,21 @@ app.use((req, res, next) => {
 // connexion à la base de données
 connectDB();
 
-// routes
+// routes API
 app.use('/api/admin', adminRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/realisations', realisationRoutes);
 
-// gestion des erreurs 404
-app.use((req, res) => {
+// en production : servir le build React et fallback SPA
+if (isProduction) {
+  app.use(express.static(path.join(__dirname, 'client', 'build'), { maxAge: '1y' }));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+  });
+} else {
+  app.use((req, res) => {
     res.status(404).json({ message: "Route non trouvée" });
-});
-
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build', { maxAge: '1y' }));
+  });
 }
 
 const PORT = process.env.PORT || 3001;

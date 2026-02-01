@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { AuthContext } from './contexts/AuthContext';
+import { API_URL } from './config/api';
 
 export const AuthProvider = ({ children }) => {
   const [isAuth, setIsAuth] = useState(false);
@@ -12,7 +13,7 @@ export const AuthProvider = ({ children }) => {
 
   const checkAuth = async () => {
     try {
-      const response = await fetch('http://localhost:3001/api/admin/verify', {
+      const response = await fetch(`${API_URL}/api/admin/verify`, {
         method: 'GET',
         credentials: 'include',
         headers: {
@@ -43,7 +44,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      await fetch('http://localhost:3001/api/admin/logout', {
+      await fetch(`${API_URL}/api/admin/logout`, {
         method: 'GET',
         credentials: 'include',
         headers: {

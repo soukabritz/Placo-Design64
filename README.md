@@ -67,23 +67,30 @@ cd client
 npm run dev
 ```
 
-## Déploiement
+## Déploiement (mode production)
 
-### Frontend (Vercel)
-- Connecter le repository GitHub à Vercel
-- Configurer les variables d'environnement dans Vercel
-- Déployer automatiquement depuis la branche main
+### Option 1 : Tout sur un seul serveur (ex. Render, Railway)
+1. Définir `NODE_ENV=production` sur le serveur.
+2. À la racine : `npm install` puis `npm run build` (build le client dans `client/build`).
+3. Lancer : `npm start` (serve Express + API + front build).
+4. Variables d'environnement : voir ci-dessous. En prod, `CORS_ORIGIN` peut rester vide si le front est servi par le même domaine.
+5. **Ne pas** définir `VITE_API_URL` dans le client si le front est servi par le même serveur (requêtes en same-origin).
 
-### Backend (Render)
-- Créer un nouveau Web Service sur Render
-- Connecter le repository GitHub
-- Configurer les variables d'environnement
-- Déployer automatiquement depuis la branche main
+### Option 2 : Front (Vercel) + Backend (Render)
+- **Backend** : sur Render, définir `NODE_ENV=production`, `CORS_ORIGIN=https://ton-site.vercel.app`.
+- **Frontend** : sur Vercel, définir `VITE_API_URL=https://ton-api.render.com` (URL de ton API), puis build. Le build doit être fait avec cette variable pour que les appels API pointent vers le backend.
+
+### Commandes production (racine)
+```bash
+npm run build   # build le client (client/build)
+NODE_ENV=production npm start   # lance le serveur (serve API + front en prod)
+```
 
 ## Variables d'Environnement
 
-### Backend (.env)
+### Backend (.env à la racine)
 ```
+NODE_ENV=production
 MONGODB_URI=
 JWT_SECRET=
 RECAPTCHA_SECRET_KEY=
@@ -92,11 +99,12 @@ CONTACT_EMAIL_PASSWORD=
 CLOUDINARY_CLOUD_NAME=
 CLOUDINARY_API_KEY=
 CLOUDINARY_API_SECRET=
+CORS_ORIGIN=   # optionnel ; ex. https://ton-front.vercel.app si front et back sur des domaines différents
 ```
 
-### Frontend (.env)
+### Frontend (client/.env, pour build prod si front sur un autre domaine)
 ```
-VITE_API_URL=
+VITE_API_URL=   # URL de l'API en prod (ex. https://ton-api.render.com). Vide si même domaine que le back.
 VITE_RECAPTCHA_SITE_KEY=
 ```
 

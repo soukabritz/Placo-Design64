@@ -2,9 +2,11 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import ReCAPTCHA from 'react-google-recaptcha';
+import { API_URL } from '../../config/api';
 import './login.scss';
 
 const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
+const recaptchaRequired = Boolean(RECAPTCHA_SITE_KEY);
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -22,13 +24,13 @@ const Login = () => {
     e.preventDefault();
     setError('');
 
-    if (!recaptchaValue) {
+    if (recaptchaRequired && !recaptchaValue) {
       setError('Veuillez valider le reCAPTCHA');
       return;
     }
 
     try {
-      const response = await fetch('http://localhost:3001/api/admin/login', {
+      const response = await fetch(`${API_URL}/api/admin/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -37,7 +39,7 @@ const Login = () => {
         body: JSON.stringify({ 
           email, 
           password,
-          recaptchaToken: recaptchaValue 
+          recaptchaToken: recaptchaValue || undefined
         }),
         credentials: 'include'
       });
@@ -81,12 +83,14 @@ const Login = () => {
             required
           />
         </div>
-        <div className="recaptcha-container">
-          <ReCAPTCHA
-            sitekey={RECAPTCHA_SITE_KEY}
-            onChange={handleRecaptchaChange}
-          />
-        </div>
+        {recaptchaRequired && (
+          <div className="recaptcha-container">
+            <ReCAPTCHA
+              sitekey={RECAPTCHA_SITE_KEY}
+              onChange={handleRecaptchaChange}
+            />
+          </div>
+        )}
         <button type="submit">Se connecter</button>
       </form>
     </div>

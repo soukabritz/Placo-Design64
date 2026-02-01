@@ -1,4 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import { API_URL } from '../../config/api';
 import './realisationsHome.scss';
 
 const RealisationsHome = () => {
@@ -39,7 +41,7 @@ const RealisationsHome = () => {
   useEffect(() => {
     const fetchRealisations = async () => {
       try {
-        const res = await fetch('http://localhost:3001/api/realisations?showOnHome=true');
+        const res = await fetch(`${API_URL}/api/realisations?showOnHome=true`);
         const data = await res.json();
         setRealisations(data);
       } catch {
@@ -93,6 +95,11 @@ const RealisationsHome = () => {
               </div>
             ))}
           </div>
+          <div className="realisations-home-cta">
+            <Link to="/realisations" className="realisations-see-more">
+              Voir plus
+            </Link>
+          </div>
         </div>
         {lightboxIndex !== null && (
           <div
@@ -134,6 +141,11 @@ const RealisationsHome = () => {
               </div>
             </div>
           ))}
+        </div>
+        <div className="realisations-home-cta">
+          <Link to="/realisations" className="realisations-see-more">
+            Voir plus
+          </Link>
         </div>
         {lightboxIndex !== null && (
           <div className="lightbox-overlay">

@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import RealisationForm from './RealisationForm';
+import { API_URL } from '../../config/api';
 import './realisationsPage.scss';
 
 const RealisationsPage = () => {
@@ -20,7 +21,7 @@ const RealisationsPage = () => {
 
   const fetchRealisations = async () => {
     try {
-      const res = await fetch('http://localhost:3001/api/realisations');
+      const res = await fetch(`${API_URL}/api/realisations`);
       const data = await res.json();
       setRealisations(data);
     } catch {
@@ -70,7 +71,7 @@ const RealisationsPage = () => {
       data.append('image', formData.image);
     }
     try {
-      const res = await fetch('http://localhost:3001/api/realisations', {
+      const res = await fetch(`${API_URL}/api/realisations`, {
         method: 'POST',
         credentials: 'include',
         body: data
@@ -100,7 +101,7 @@ const RealisationsPage = () => {
       data.append('image', formData.image);
     }
     try {
-      const res = await fetch(`http://localhost:3001/api/realisations/${editReal._id}`, {
+      const res = await fetch(`${API_URL}/api/realisations/${editReal._id}`, {
         method: 'PUT',
         credentials: 'include',
         body: data
@@ -124,7 +125,7 @@ const RealisationsPage = () => {
     setIsLoading(true);
     setError('');
     try {
-      const res = await fetch(`http://localhost:3001/api/realisations/${deleteId}`, {
+      const res = await fetch(`${API_URL}/api/realisations/${deleteId}`, {
         method: 'DELETE',
         credentials: 'include'
       });

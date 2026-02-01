@@ -33,10 +33,10 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "node server.js",
+    "start": "node app.js",
     "build": "cd client && npm install && npm run build",
-    "dev": "nodemon server.js",
-    "client": "cd client && npm start",
+    "dev": "nodemon app.js",
+    "client": "cd client && npm run dev",
     "dev:full": "concurrently \"npm run dev\" \"npm run client\"",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
