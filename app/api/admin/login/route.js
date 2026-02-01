@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import connectDB from "@/lib/db/mongodb";
 import Admin from "@/lib/models/Admin";
 import { signToken, setAuthCookie } from "@/lib/utils/auth";
-import axios from "axios";
 
 export async function POST(request) {
   try {
@@ -34,23 +33,13 @@ export async function POST(request) {
       }
 
       try {
-        const recaptchaResponse = await axios.post(
-          `https://www.google.com/recaptcha/api/siteverify`,
-          null,
-          {
-            params: {
-              secret: process.env.RECAPTCHA_SECRET_KEY,
-              response: recaptchaToken,
-            },
-          },
-        );
+        const recaptchaUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${recaptchaToken}`;
+        const recaptchaResponse = await fetch(recaptchaUrl, { method: "POST" });
+        const recaptchaData = await recaptchaResponse.json();
 
-        console.log(
-          "Login API: reCAPTCHA verification result",
-          recaptchaResponse.data,
-        );
+        console.log("Login API: reCAPTCHA verification result", recaptchaData);
 
-        if (!recaptchaResponse.data.success) {
+        if (!recaptchaData.success) {
           console.log("Login API: reCAPTCHA verification failed");
           return NextResponse.json(
             { message: "Échec de la vérification reCAPTCHA" },
@@ -112,7 +101,14 @@ export async function POST(request) {
 
     return response;
   } catch (error) {
-    console.error("Login API: Error:", error);
-    return NextResponse.json({ message: "Erreur serveur" }, { status: 500 });
+    console.error("Login API: Global Error:", error);
+    return NextResponse.json(
+      {
+        message: "Erreur serveur",
+        error: error.message,
+        stack: process.env.NODE_ENV === "development" ? error.stack : undefined,
+      },
+      { status: 500 },
+    );
   }
 }

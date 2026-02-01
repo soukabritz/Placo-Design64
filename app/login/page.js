@@ -67,7 +67,24 @@ export default function LoginPage() {
         return;
       }
 
-      const data = await response.json();
+      console.log("Response Debug:", {
+        status: response.status,
+        ok: response.ok,
+        url: response.url,
+        contentType: response.headers.get("content-type"),
+      });
+
+      let data;
+      const responseClone = response.clone();
+      try {
+        data = await response.json();
+      } catch (parseErr) {
+        const text = await responseClone.text();
+        console.error("Erreur de parsing JSON:", parseErr);
+        console.error("Contenu de la réponse (text):", text);
+        setError("Erreur serveur: réponse non valide");
+        return;
+      }
 
       if (response.ok) {
         await checkAuth();
