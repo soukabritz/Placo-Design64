@@ -6,12 +6,18 @@ import { uploadToCloudinary } from "@/lib/utils/cloudinary";
 
 export async function GET() {
   try {
+    console.log("[API Realisations] GET request received");
     await connectDB();
+    console.log("[API Realisations] Database connected, fetching data...");
     const realisations = await Realisation.find().sort({ date: -1 });
+    console.log(`[API Realisations] Found ${realisations.length} items`);
     return NextResponse.json(realisations);
   } catch (error) {
     console.error("Erreur GET realisations:", error);
-    return NextResponse.json({ message: "Erreur serveur" }, { status: 500 });
+    return NextResponse.json(
+      { message: "Erreur serveur", details: error.message },
+      { status: 500 },
+    );
   }
 }
 

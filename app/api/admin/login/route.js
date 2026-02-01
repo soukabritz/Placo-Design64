@@ -34,7 +34,17 @@ export async function POST(request) {
 
       try {
         const recaptchaUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${recaptchaToken}`;
-        const recaptchaResponse = await fetch(recaptchaUrl, { method: "POST" });
+
+        // Add a 5s timeout to the fetch
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 5000);
+
+        const recaptchaResponse = await fetch(recaptchaUrl, {
+          method: "POST",
+          signal: controller.signal,
+        });
+        clearTimeout(timeoutId);
+
         const recaptchaData = await recaptchaResponse.json();
 
         console.log("Login API: reCAPTCHA verification result", recaptchaData);
@@ -49,7 +59,12 @@ export async function POST(request) {
       } catch (error) {
         console.error("Login API: reCAPTCHA error:", error);
         return NextResponse.json(
-          { message: "Erreur lors de la vérification reCAPTCHA" },
+          {
+            message:
+              error.name === "AbortError"
+                ? "Le service reCAPTCHA a expiré"
+                : "Erreur lors de la vérification reCAPTCHA",
+          },
           { status: 400 },
         );
       }
