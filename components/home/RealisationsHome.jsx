@@ -48,9 +48,18 @@ const RealisationsHome = () => {
       try {
         setIsLoading(true);
         const res = await fetch("/api/realisations/home");
+        if (!res.ok) {
+          throw new Error("Erreur lors de la récupération des réalisations");
+        }
         const data = await res.json();
-        setRealisations(data);
-      } catch {
+        if (Array.isArray(data)) {
+          setRealisations(data);
+        } else {
+          console.error("Format de données invalide:", data);
+          setRealisations([]);
+        }
+      } catch (err) {
+        console.error("Fetch error:", err);
         setRealisations([]);
       } finally {
         setIsLoading(false);
