@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import "./servicesCarousel.scss";
 
 const services = [
@@ -139,22 +140,37 @@ const ServicesCarousel = () => {
         ))}
       </div>
       <div className="carousel-controls">
-        <button className="carousel-button prev" onClick={handlePrev}>
-          &lt;
-        </button>
+        <div className="carousel-controls-left">
+          <button
+            type="button"
+            className="carousel-button prev"
+            onClick={handlePrev}
+            aria-label="Slide précédente"
+          >
+            <FaChevronLeft />
+          </button>
+        </div>
         <div className="carousel-dots">
           {services.map((_, index) => (
             <button
               key={index}
+              type="button"
               className={`dot ${index === currentIndex ? "active" : ""}`}
               onClick={() => handleDotClick(index)}
               aria-label={`Aller à la slide ${index + 1}`}
             />
           ))}
         </div>
-        <button className="carousel-button next" onClick={handleNext}>
-          &gt;
-        </button>
+        <div className="carousel-controls-right">
+          <button
+            type="button"
+            className="carousel-button next"
+            onClick={handleNext}
+            aria-label="Slide suivante"
+          >
+            <FaChevronRight />
+          </button>
+        </div>
       </div>
     </div>
   );

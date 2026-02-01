@@ -7,10 +7,12 @@ import { FaEnvelope, FaPhoneAlt } from "react-icons/fa";
 
 const HeroSection = () => {
   return (
-    <div
-      className="hero-section"
-      style={{ backgroundImage: `url(/home-bg2.webp)` }}
-    >
+    <div className="hero-section">
+      <div
+        className="hero-bg"
+        style={{ backgroundImage: `url(/home-bg2.webp)` }}
+        aria-hidden="true"
+      />
       <div className="hero-overlay"></div>
       <div className="hero-content">
         <div className="container">
@@ -19,7 +21,13 @@ const HeroSection = () => {
               <span className="hero-subtitle">
                 À VOTRE SERVICE SUR TOUT LE PAYS BASQUE
               </span>
-              <h1>Créons l'intérieur parfait pour votre confort</h1>
+              <h1>
+                Créons l'intérieur
+                <br />
+                parfait pour votre
+                <br />
+                confort
+              </h1>
               <p className="hero-description">
                 Nous nous chargeons de tous les projets de rénovation.
               </p>

@@ -4,8 +4,12 @@ import { AuthProvider } from "@/lib/contexts/AuthContext";
 import Navbar from "@/components/navigation/Navbar";
 import Footer from "@/components/navigation/Footer";
 
-const inter = Inter({ subsets: ["latin"] });
-const openSans = Open_Sans({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], weight: ["400", "600", "700"] });
+const openSans = Open_Sans({
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+  display: "swap",
+});
 
 export const metadata = {
   title: "Placo Design 64 - Plâtrerie, Peinture, Carrelage au Pays Basque",

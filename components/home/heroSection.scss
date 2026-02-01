@@ -1,144 +1,223 @@
-@use "variables" as *;
+@use "../../styles/variables" as *;
 
 .hero-section {
+  width: 100%;
+  min-height: 85vh;
+  padding: 0;
   position: relative;
-  height: calc(100vh - #{$navbar-height-mobile});
-  min-height: 500px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: $color-white;
+  z-index: 0;
+}
 
+.hero-overlay {
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba($color-white, 0.35) -20%,
+    rgba($color-white, 0.65) 10%,
+    rgba($color-white, 0.9) 30%,
+    rgba($color-white, 0.9) 50%,
+    rgba($color-white, 0.25) 100%
+  );
+}
+
+@media (max-width: ($breakpoint-lg - 1)) {
   .hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1;
-  }
-
-  .hero-content {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-
-    .hero-flex {
-      display: flex;
-      flex-direction: column;
-      gap: $spacing-xl;
-    }
-  }
-
-  .hero-left {
-    text-align: center;
-
-    .hero-subtitle {
-      display: block;
-      font-size: $font-size-xs;
-      font-weight: 700;
-      letter-spacing: 2px;
-      margin-bottom: $spacing-sm;
-      color: $color-primary;
-    }
-
-    h1 {
-      font-size: $font-size-2xl;
-      font-weight: 800;
-      margin-bottom: $spacing-base;
-      line-height: 1.2;
-      font-family: $font-family-primary;
-    }
-
-    .hero-description {
-      font-size: $font-size-base;
-      margin-bottom: $spacing-xl;
-      opacity: 0.9;
-    }
-
-    .hero-buttons {
-      display: flex;
-      flex-direction: column;
-      gap: $spacing-base;
-      align-items: center;
-
-      a {
-        width: 100%;
-        max-width: 250px;
-        padding: $spacing-base $spacing-lg;
-        border-radius: $border-radius-sm;
-        font-weight: 600;
-        text-align: center;
-        transition: $transition-base;
-        text-decoration: none;
-      }
-
-      .contact-btn {
-        background-color: $color-primary;
-        color: $color-white;
-
-        &:hover {
-          background-color: $color-primary-dark;
-          transform: translateY(-2px);
-        }
-      }
-
-      .phone-btn {
-        background-color: rgba($color-white, 0.1);
-        color: $color-white;
-        border: 1px solid rgba($color-white, 0.5);
-        backdrop-filter: blur(5px);
-
-        &:hover {
-          background-color: rgba($color-white, 0.2);
-          transform: translateY(-2px);
-        }
-      }
-    }
+    background: linear-gradient(
+      180deg,
+      rgba($color-white, 0.3) 0%,
+      rgba($color-white, 0.7) 20%,
+      rgba($color-white, 0.95) 40%,
+      rgba($color-white, 0.95) 60%,
+      rgba($color-white, 0.3) 100%
+    );
   }
 }
 
+.hero-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: $container-max-width;
+  margin: 0 auto;
+  padding: 0 $spacing-lg;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(85vh - #{$navbar-height});
+  margin-top: $navbar-height;
+
+  .container {
+    width: 100%;
+  }
+
+  .hero-flex {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-xl;
+  }
+}
+
+.hero-left {
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+  margin-bottom: $spacing-lg;
+}
+
+.hero-subtitle {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 600;
+  margin-bottom: $spacing-base;
+}
+
+.hero-left h1 {
+  font-size: $font-size-3xl;
+  color: $color-text-primary;
+  line-height: 1.2;
+  font-weight: 700;
+  margin-bottom: $spacing-base;
+}
+
+.hero-description {
+  font-size: $font-size-lg;
+  color: $color-text-secondary;
+  line-height: 1.6;
+  margin-bottom: $spacing-lg;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: $spacing-base;
+  justify-content: center;
+
+  button {
+    padding: 0 $spacing-lg;
+    font-size: $font-size-base;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: $transition-base;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    min-width: 220px;
+    justify-content: center;
+    height: 50px;
+    box-sizing: border-box;
+  }
+}
+
+.hero-buttons .contact-btn,
+.hero-buttons .phone-btn {
+  margin: 0 !important;
+  width: 220px !important;
+  min-width: 220px !important;
+  max-width: 220px !important;
+  height: 50px !important;
+  padding: 0 32px !important;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-btn {
+  background-color: $color-primary;
+  color: $color-white;
+  box-shadow: 0 4px 6px rgba($color-primary, 0.2);
+  border-radius: 12px;
+
+  &:hover {
+    background-color: $color-primary-dark;
+    transform: translateY(-2px);
+  }
+}
+
+a.phone-btn,
+button.phone-btn {
+  background-color: transparent;
+  color: $color-text-primary;
+  border: none;
+  transition: $transition-base;
+  border-radius: 50px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 220px;
+  height: 50px;
+  box-sizing: border-box;
+  padding: 0 $spacing-lg;
+  font-size: $font-size-base;
+  gap: $spacing-sm;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+a.phone-btn:hover,
+button.phone-btn:hover {
+  background-color: rgba($color-primary, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba($color-primary, 0.2);
+  color: $color-text-primary;
+  border: none;
+}
+
 @media (min-width: $breakpoint-md) {
-  .hero-section {
-    height: calc(100vh - #{$navbar-height});
+  .hero-left h1 {
+    font-size: $font-size-4xl;
+  }
 
-    .hero-content {
-      .hero-flex {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        gap: $spacing-2xl;
-      }
-    }
+  .hero-buttons {
+    gap: $spacing-md;
+  }
+}
 
-    .hero-left {
-      text-align: left;
-      flex: 1;
+@media (min-width: $breakpoint-lg) {
+  .hero-content .hero-flex {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 4rem;
+  }
 
-      .hero-subtitle {
-        font-size: $font-size-sm;
-      }
+  .hero-left {
+    margin-bottom: 0;
+    text-align: left;
+  }
 
-      h1 {
-        font-size: $font-size-4xl;
-      }
+  .hero-buttons {
+    justify-content: flex-start;
+  }
+}
 
-      .hero-description {
-        font-size: $font-size-lg;
-      }
-
-      .hero-buttons {
-        flex-direction: row;
-        justify-content: flex-start;
-
-        a {
-          width: auto;
-        }
-      }
-    }
+@media (min-width: $breakpoint-2xl) {
+  .hero-left h1 {
+    font-size: 4rem;
   }
 }
