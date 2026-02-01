@@ -126,9 +126,16 @@
 .footer-bottom {
   width: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-base;
   margin-top: 0.5rem;
   margin-bottom: 1rem;
+  p {
+    margin: 0;
+    font-size: $font-size-sm;
+    color: $color-text-light;
+  }
 }
 
 .footer-top-btn {

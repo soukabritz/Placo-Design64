@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import logo from '../../assets/LogoPlacoDesign64.png';
 import { FaPhoneAlt } from 'react-icons/fa';
 import './footer.scss';
@@ -13,7 +13,7 @@ const Footer = () => {
     <footer className="footer">
       <div className="footer-content">
         <div className="footer-col footer-col-left">
-          <img src={logo} alt="Logo Placo Design 64" className="footer-logo" />
+          <img src={logo} alt="Logo Placo Design 64" className="footer-logo" loading="lazy" />
           <div className="footer-info">
             <a href="tel:0665052999" className="footer-phone">
               <FaPhoneAlt style={{ marginRight: '0.5em', verticalAlign: 'middle' }} />
@@ -25,6 +25,8 @@ const Footer = () => {
           <nav className="footer-links">
             <Link to="/">Accueil</Link>
             <Link to="/contact">Contactez-nous</Link>
+            <Link to="/conditions-utilisation">Conditions d'utilisation</Link>
+            <Link to="/politique-confidentialite">Politique de confidentialité</Link>
           </nav>
         </div>
         <div className="footer-col footer-col-right">
@@ -37,6 +39,7 @@ const Footer = () => {
       </div>
       <div className="footer-bottom">
         <button className="footer-top-btn" onClick={scrollToTop}>↑ Haut de page</button>
+        <p>&copy; {new Date().getFullYear()} Placo Design 64 - Tous droits réservés.</p>
       </div>
     </footer>
   );

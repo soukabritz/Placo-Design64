@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import logo from '../../assets/LogoPlacoDesign64.png';
 import './navbar.scss';
+import { FaBars, FaTimes, FaEnvelope, FaUser, FaChevronDown, FaChevronUp } from 'react-icons/fa';
 
 const services = [
   { id: 'platrerie', name: 'Plâtrerie', path: '/services/platrerie' },
@@ -66,7 +67,7 @@ const Navbar = () => {
     }
   };
 
-  // Ajout : gestion du hover pour ouvrir le menu services sur desktop
+ 
   const handleServicesMouseEnter = () => {
     if (!isMobile && !isServicesLocked) setIsServicesOpen(true);
   };
@@ -98,7 +99,7 @@ const Navbar = () => {
     >
       <div className="services-toggle" onClick={handleServicesClick}>
         <span>Services</span>
-        <i className={`fas fa-chevron-${isServicesOpen ? 'up' : 'down'}`}></i>
+        {isServicesOpen ? <FaChevronUp style={{ marginLeft: '0.5em' }} /> : <FaChevronDown style={{ marginLeft: '0.5em' }} />}
       </div>
       {isServicesOpen && (
         <div className="services-list">
@@ -132,7 +133,7 @@ const Navbar = () => {
           <div className="mobile-menu-overlay" onClick={toggleMenu}>
             <div className="mobile-menu" onClick={e => e.stopPropagation()}>
               <button className="close-menu-btn" onClick={toggleMenu}>
-                <i className="fas fa-times"></i>
+                <FaTimes />
               </button>
               <Link to="/" onClick={toggleMenu}>Accueil</Link>
               {renderServicesMenu(true)}
@@ -152,21 +153,21 @@ const Navbar = () => {
         {/* Bottom Navigation Bar */}
         <nav className="bottom-navbar">
           <button className="nav-item" onClick={toggleMenu}>
-            <i className={`fas ${isMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
+            {isMenuOpen ? <FaTimes /> : <FaBars />}
             <span>Menu</span>
           </button>
           <Link to="/contact" className="nav-item">
-            <i className="fas fa-envelope"></i>
+            <FaEnvelope />
             <span>Contact</span>
           </Link>
           {isAuth ? (
             <button onClick={logout} className="nav-item">
-              <i className="fas fa-user"></i>
+              <FaUser />
               <span>Déconnexion</span>
             </button>
           ) : (
             <Link to="/login" className="nav-item">
-              <i className="fas fa-user"></i>
+              <FaUser />
               <span>Connexion</span>
             </Link>
           )}

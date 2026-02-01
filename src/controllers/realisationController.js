@@ -13,7 +13,7 @@ exports.getAllRealisations = async (req, res) => {
 // pour obtenir les réalisations à mettre en avant (pour l'accueil)
 exports.getFeaturedRealisations = async (req, res) => {
   try {
-    const realisations = await Realisation.find({ showOnHome: true }).sort({ date: -1 }).limit(6);
+    const realisations = await Realisation.find({ showOnHome: true }).sort({ date: -1 });
     res.json(realisations);
   } catch (error) {
     res.status(500).json({ message: 'Erreur serveur', error });

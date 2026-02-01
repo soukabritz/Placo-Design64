@@ -8,6 +8,7 @@ const adminRoutes = require('./routes/adminRoutes');
 const contactRoutes = require('./routes/contactRoutes');
 const realisationRoutes = require('./routes/realisationRoutes');
 const compression = require('compression');
+const errorHandler = require('./middleware/errorHandler');
 
 const app = express();
 
@@ -58,6 +59,8 @@ if (isProduction) {
     res.status(404).json({ message: "Route non trouvée" });
   });
 }
+
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {

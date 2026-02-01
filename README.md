@@ -1,71 +1,111 @@
-# Placo Design 64
+Placo Design 64
 
-Site vitrine pour Placo Design 64, une entreprise de plâtrerie et rénovation.
 
-## Structure du Projet
+Ce dépôt contient le code source de l'application web et de l'interface d'administration pour Placo Design 64, une entreprise spécialisée dans les travaux de rénovation (plâtrerie, peinture, carrelage) au Pays Basque.
 
-```
-placo-design-64/
-├── client/                 # Frontend React
-│   ├── src/
-│   │   ├── components/    # Composants React
-│   │   ├── styles/        # Styles SCSS
-│   │   └── ...
-│   └── ...
-├── src/                    # Backend Node.js
-│   ├── controllers/       # Contrôleurs
-│   ├── models/           # Modèles MongoDB
-│   └── ...
-└── ...
-```
+Le site a été conçu pour être à la fois performant, sécurisé et facile à administrer pour le client.
 
-## Technologies Utilisées
+- Fonctionnalités
 
-### Frontend
-- React
-- Vite
-- SCSS
-- React Router
-- ReCAPTCHA
+- Inerface publique :
+    - Présentation des différents services de l'entreprise.
+    - Galerie des réalisations.
+    - Formulaire de contact sécurisé.
+    - Design entièrement responsive.
 
-### Backend
+- Panneau d'administration :
+    - Système d'authentification sécurisé avec JWT.
+    - Gestion complète des réalisations : ajout, modification et suppression.
+    - Upload d'images directement sur le cloud (Cloudinary).
+    - Possibilité de choisir quelles réalisations mettre en avant sur la page d'accueil.
+
+- Technologies utilisées
+
+- Backend :
+    - Node.js avec Express pour le serveur API REST.
+    - MongoDB avec Mongoose comme base de données.
+    - JWT pour la gestion de l'authentification.
+    - Cloudinary pour le stockage et la gestion des images.
+    - Nodemaile pour l'envoi des e-mails depuis le formulaire de contact.
+
+- Frontend :
+    - React (avec Vite) pour une interface utilisateur réactive.
+    - React Router pour la navigation entre les pages.
+    - Sass (SCSS) pour un style modulaire.
+    - Axios pour les requêtes vers l'API backend.
+
+- Démarrage rapide
+
+Suivre ces étapes pour lancer le projet sur une machine locale.
+
+ - Prérequis
+
 - Node.js
-- Express
-- MongoDB
-- JWT Authentication
-- Cloudinary
-- Nodemailer
+- npm
+- Une base de données MongoDB 
 
-## Installation
+- Installation
 
-1. Cloner le repository
-```bash
-git clone [URL_DU_REPO]
-```
+1.  Clonez le projet :
+    bash
+    git clone https://github.com/votre-utilisateur/placo-design-64.git
+    cd placo-design-64
+    
 
-2. Installer les dépendances
-```bash
-# Backend
-npm install
+2.  Installez les dépendances du backend :
+    bash
+    npm install
+    
 
-# Frontend
-cd client
-npm install
-```
+3.  Installez les dépendances du frontend :
+    bash
+    cd client
+    npm install
+    cd .. 
+    
 
-3. Configuration des variables d'environnement
-- Créer un fichier `.env` à la racine du projet
-- Créer un fichier `.env` dans le dossier `client`
+4.  Configurez les variables d'environnement :
+    Créer un fichier `.env` à la racine du projet et le remplir en se basant sur cet exemple :
 
-4. Démarrer le développement
-```bash
-# Backend
-npm run server
+    env
+    Fichier .env (à la racine)
 
-# Frontend
-cd client
-npm run dev
-```
+    - Base de données
+    MONGODB_URI="URL"
+
+    - Authentification
+    JWT_SECRET="TOKEN"
+
+    - E-mail de contact (pour Nodemailer)
+    CONTACT_EMAIL="EMAIL"
+    CONTACT_EMAIL_PASSWORD="MDP"
+
+    - Cloudinary
+    CLOUDINARY_CLOUD_NAME="NOM"
+    CLOUDINARY_API_KEY="KEY"
+    CLOUDINARY_API_SECRET="SECRET-KEY"
+    ```
+
+ - Lancement
+
+Lancer le serveur et le client dans deux terminaux séparés :
+
+- Pour le backend :
+    bash
+    npm run server
+    
+    Le serveur est sur `http://localhost:3001`.
+
+- Pour le frontend :
+    bash
+    cd client
+    npm run dev
+    
+    Le site sera visible sur `http://localhost:5173`.
+
+- Administration
+
+Pour se connecter au panneau d'administration en local, se rendre sur `/login` et utiliser les identifiants créés dans la base de données (script `node scripts/createAdmin.js`).
 
 ## Déploiement (mode production)
 
@@ -86,9 +126,7 @@ npm run build   # build le client (client/build)
 NODE_ENV=production npm start   # lance le serveur (serve API + front en prod)
 ```
 
-## Variables d'Environnement
-
-### Backend (.env à la racine)
+### Backend (.env à la racine en prod)
 ```
 NODE_ENV=production
 MONGODB_URI=
@@ -107,11 +145,3 @@ CORS_ORIGIN=   # optionnel ; ex. https://ton-front.vercel.app si front et back s
 VITE_API_URL=   # URL de l'API en prod (ex. https://ton-api.render.com). Vide si même domaine que le back.
 VITE_RECAPTCHA_SITE_KEY=
 ```
-
-## Fonctionnalités
-
-- Authentification admin
-- Gestion des réalisations
-- Formulaire de contact
-- Galerie de photos
-- Responsive design

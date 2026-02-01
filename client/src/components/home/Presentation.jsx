@@ -1,5 +1,6 @@
 import React from 'react';
 import heroImgWebp from '../../assets/hero-image.webp';
+import { FaEnvelope } from 'react-icons/fa';
 
 const Presentation = () => (
   <section className="home-presentation">
@@ -27,12 +28,12 @@ const Presentation = () => (
         Notre <b>savoir-faire</b> et notre <b>exigence de qualité</b> nous permettent de transformer vos espaces en lieux de vie <b>harmonieux</b>, <b>fonctionnels</b> et <b>esthétiques</b>.
       </p>
       <a href="/contact" className="contact-btn" style={{ textDecoration: 'none' }}>
-        <i className="fas fa-envelope"></i> Contactez-nous
+        <FaEnvelope style={{ marginRight: '0.5em', verticalAlign: 'middle' }} /> Contactez-nous
       </a>
     </div>
     <div className="presentation-image">
       <picture>
-        <img src={heroImgWebp} alt="Réalisation Placo Design 64" width="420" height="320" />
+        <img src={heroImgWebp} alt="Réalisation Placo Design 64" width="420" height="320" loading="lazy" />
       </picture>
     </div>
   </section>

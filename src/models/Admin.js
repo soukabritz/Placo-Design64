@@ -10,4 +10,16 @@ adminSchema.methods.comparePassword = async function (candidatePassword) {
   return bcrypt.compare(candidatePassword, this.password);
 };
 
+// hacher le mot de passe avant sauvegarde (si mot de passe en clair)
+adminSchema.pre('save', async function(next) {
+  if (!this.isModified('password')) return next();
+  try {
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+    next();
+  } catch (err) {
+    next(err);
+  }
+});
+
 module.exports = mongoose.model("Admin", adminSchema);
