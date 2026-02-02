@@ -49,17 +49,39 @@ const RealisationsHome = () => {
         setIsLoading(true);
         const res = await fetch("/api/realisations/home");
         if (!res.ok) {
-          throw new Error("Erreur lors de la récupération des réalisations");
+          const errorText = await res.text();
+          const error = new Error(`HTTP ${res.status}: ${res.statusText}`);
+          console.error("RealisationsHome: API Response Error", {
+            error: error,
+            status: res.status,
+            statusText: res.statusText,
+            url: res.url,
+            responseText: errorText,
+            timestamp: new Date().toISOString(),
+          });
+          throw error;
         }
         const data = await res.json();
         if (Array.isArray(data)) {
           setRealisations(data);
         } else {
-          console.error("Format de données invalide:", data);
+          const error = new Error("Invalid data format received from API");
+          console.error("RealisationsHome: Data Format Error", {
+            error: error,
+            receivedData: data,
+            dataType: typeof data,
+            isArray: Array.isArray(data),
+            timestamp: new Date().toISOString(),
+          });
           setRealisations([]);
         }
       } catch (err) {
-        console.error("Fetch error:", err);
+        console.error("RealisationsHome: Fetch Error", {
+          error: err,
+          message: err.message,
+          stack: err.stack,
+          timestamp: new Date().toISOString(),
+        });
         setRealisations([]);
       } finally {
         setIsLoading(false);

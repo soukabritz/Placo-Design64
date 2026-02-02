@@ -13,7 +13,13 @@ export async function GET() {
     console.log(`[API Home Realisations] Found ${realisations.length} items`);
     return NextResponse.json(realisations);
   } catch (error) {
-    console.error("Erreur GET home realisations:", error);
+    console.error("[API Home Realisations] GET Error", {
+      error: error,
+      message: error.message,
+      stack: error.stack,
+      timestamp: new Date().toISOString(),
+      name: error.name,
+    });
     return NextResponse.json(
       { message: "Erreur serveur", details: error.message },
       { status: 500 },

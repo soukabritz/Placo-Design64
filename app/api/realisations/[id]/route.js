@@ -6,9 +6,17 @@ import { uploadToCloudinary } from "@/lib/utils/cloudinary";
 
 export async function PUT(request, { params }) {
   try {
+    console.log("[API Realisations] PUT request received");
     const { id } = await params;
     const auth = await verifyAuth(request);
     if (!auth.authenticated) {
+      const error = new Error("Unauthorized access attempt");
+      console.error("[API Realisations] PUT Authentication Error", {
+        error: error,
+        auth: auth,
+        id: id,
+        timestamp: new Date().toISOString(),
+      });
       return NextResponse.json({ message: "Non autorisé" }, { status: 401 });
     }
 
@@ -40,6 +48,10 @@ export async function PUT(request, { params }) {
       updateData = await request.json();
     }
 
+    console.log("[API Realisations] PUT: Updating realisation", {
+      id,
+      updateData,
+    });
     await connectDB();
     const realisation = await Realisation.findByIdAndUpdate(id, updateData, {
       new: true,
@@ -47,17 +59,33 @@ export async function PUT(request, { params }) {
     });
 
     if (!realisation) {
+      const error = new Error("Realisation not found");
+      console.error("[API Realisations] PUT Database Error", {
+        error: error,
+        id: id,
+        timestamp: new Date().toISOString(),
+      });
       return NextResponse.json(
         { message: "Réalisation non trouvée" },
         { status: 404 },
       );
     }
 
+    console.log("[API Realisations] PUT: Realisation updated successfully", {
+      id: id,
+      timestamp: new Date().toISOString(),
+    });
     return NextResponse.json(realisation);
   } catch (error) {
-    console.error("Erreur PUT realisation:", error);
+    console.error("[API Realisations] PUT Error", {
+      error: error,
+      message: error.message,
+      stack: error.stack,
+      timestamp: new Date().toISOString(),
+      name: error.name,
+    });
     return NextResponse.json(
-      { message: "Erreur lors de la modification" },
+      { message: "Erreur lors de la modification", details: error.message },
       { status: 500 },
     );
   }
@@ -65,27 +93,53 @@ export async function PUT(request, { params }) {
 
 export async function DELETE(request, { params }) {
   try {
+    console.log("[API Realisations] DELETE request received");
     const { id } = await params;
     const auth = await verifyAuth(request);
     if (!auth.authenticated) {
+      const error = new Error("Unauthorized access attempt");
+      console.error("[API Realisations] DELETE Authentication Error", {
+        error: error,
+        auth: auth,
+        id: id,
+        timestamp: new Date().toISOString(),
+      });
       return NextResponse.json({ message: "Non autorisé" }, { status: 401 });
     }
 
+    console.log("[API Realisations] DELETE: Deleting realisation", { id });
     await connectDB();
     const realisation = await Realisation.findByIdAndDelete(id);
 
     if (!realisation) {
+      const error = new Error("Realisation not found");
+      console.error("[API Realisations] DELETE Database Error", {
+        error: error,
+        id: id,
+        timestamp: new Date().toISOString(),
+      });
       return NextResponse.json(
         { message: "Réalisation non trouvée" },
         { status: 404 },
       );
     }
 
+    console.log("[API Realisations] DELETE: Realisation deleted successfully", {
+      id: id,
+      titre: realisation.titre,
+      timestamp: new Date().toISOString(),
+    });
     return NextResponse.json({ message: "Réalisation supprimée" });
   } catch (error) {
-    console.error("Erreur DELETE realisation:", error);
+    console.error("[API Realisations] DELETE Error", {
+      error: error,
+      message: error.message,
+      stack: error.stack,
+      timestamp: new Date().toISOString(),
+      name: error.name,
+    });
     return NextResponse.json(
-      { message: "Erreur lors de la suppression" },
+      { message: "Erreur lors de la suppression", details: error.message },
       { status: 500 },
     );
   }

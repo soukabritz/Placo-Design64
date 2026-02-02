@@ -14,7 +14,13 @@ export async function POST(request) {
     });
 
     if (!email || !password) {
-      console.log("Login API: Missing email or password");
+      const error = new Error("Missing email or password");
+      console.error("Login API: Validation Error - Missing email or password", {
+        error: error,
+        hasEmail: !!email,
+        hasPassword: !!password,
+        timestamp: new Date().toISOString(),
+      });
       return NextResponse.json(
         { message: "Email et mot de passe requis" },
         { status: 400 },
@@ -25,7 +31,11 @@ export async function POST(request) {
     if (process.env.RECAPTCHA_SECRET_KEY) {
       console.log("Login API: reCAPTCHA verification required");
       if (!recaptchaToken) {
-        console.log("Login API: Missing reCAPTCHA token");
+        const error = new Error("Missing reCAPTCHA token");
+        console.error("Login API: Validation Error - Missing reCAPTCHA token", {
+          error: error,
+          timestamp: new Date().toISOString(),
+        });
         return NextResponse.json(
           { message: "Veuillez valider le reCAPTCHA" },
           { status: 400 },
@@ -50,7 +60,12 @@ export async function POST(request) {
         console.log("Login API: reCAPTCHA verification result", recaptchaData);
 
         if (!recaptchaData.success) {
-          console.log("Login API: reCAPTCHA verification failed");
+          const error = new Error("reCAPTCHA verification failed");
+          console.error("Login API: reCAPTCHA Verification Error", {
+            error: error,
+            recaptchaData: recaptchaData,
+            timestamp: new Date().toISOString(),
+          });
           return NextResponse.json(
             { message: "Échec de la vérification reCAPTCHA" },
             { status: 400 },
@@ -79,7 +94,12 @@ export async function POST(request) {
     console.log("Login API: Admin found:", !!admin);
 
     if (!admin) {
-      console.log("Login API: Admin not found");
+      const error = new Error("Admin not found");
+      console.error("Login API: Authentication Error - Admin not found", {
+        error: error,
+        email: email,
+        timestamp: new Date().toISOString(),
+      });
       return NextResponse.json(
         { message: "Email ou mot de passe incorrect" },
         { status: 401 },
@@ -92,7 +112,13 @@ export async function POST(request) {
     console.log("Login API: Password valid:", isValidPassword);
 
     if (!isValidPassword) {
-      console.log("Login API: Invalid password");
+      const error = new Error("Invalid password");
+      console.error("Login API: Authentication Error - Invalid password", {
+        error: error,
+        email: email,
+        adminId: admin._id.toString(),
+        timestamp: new Date().toISOString(),
+      });
       return NextResponse.json(
         { message: "Email ou mot de passe incorrect" },
         { status: 401 },
@@ -116,7 +142,13 @@ export async function POST(request) {
 
     return response;
   } catch (error) {
-    console.error("Login API: Global Error:", error);
+    console.error("Login API: Global Error", {
+      error: error,
+      message: error.message,
+      stack: error.stack,
+      timestamp: new Date().toISOString(),
+      name: error.name,
+    });
     return NextResponse.json(
       {
         message: "Erreur serveur",

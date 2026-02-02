@@ -13,7 +13,13 @@ export async function GET() {
     console.log(`[API Realisations] Found ${realisations.length} items`);
     return NextResponse.json(realisations);
   } catch (error) {
-    console.error("Erreur GET realisations:", error);
+    console.error("[API Realisations] GET Error", {
+      error: error,
+      message: error.message,
+      stack: error.stack,
+      timestamp: new Date().toISOString(),
+      name: error.name,
+    });
     return NextResponse.json(
       { message: "Erreur serveur", details: error.message },
       { status: 500 },
@@ -25,6 +31,12 @@ export async function POST(request) {
   try {
     const auth = await verifyAuth(request);
     if (!auth.authenticated) {
+      const error = new Error("Unauthorized access attempt");
+      console.error("[API Realisations] POST Authentication Error", {
+        error: error,
+        auth: auth,
+        timestamp: new Date().toISOString(),
+      });
       return NextResponse.json({ message: "Non autorisé" }, { status: 401 });
     }
 
@@ -35,6 +47,13 @@ export async function POST(request) {
     const image = formData.get("image");
 
     if (!titre || !image) {
+      const error = new Error("Missing required fields");
+      console.error("[API Realisations] POST Validation Error", {
+        error: error,
+        hasTitre: !!titre,
+        hasImage: !!image,
+        timestamp: new Date().toISOString(),
+      });
       return NextResponse.json(
         { message: "Le titre et l'image sont requis" },
         { status: 400 },
@@ -62,11 +81,22 @@ export async function POST(request) {
     });
 
     await realisation.save();
+    console.log("[API Realisations] POST: Realisation created successfully", {
+      id: realisation._id.toString(),
+      titre: titre,
+      timestamp: new Date().toISOString(),
+    });
     return NextResponse.json(realisation, { status: 201 });
   } catch (error) {
-    console.error("Erreur POST realisation:", error);
+    console.error("[API Realisations] POST Error", {
+      error: error,
+      message: error.message,
+      stack: error.stack,
+      timestamp: new Date().toISOString(),
+      name: error.name,
+    });
     return NextResponse.json(
-      { message: "Erreur lors de la création" },
+      { message: "Erreur lors de la création", details: error.message },
       { status: 500 },
     );
   }
