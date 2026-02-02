@@ -23,11 +23,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="fr" suppressHydrationWarning>
       <body className={`${openSans.className} ${inter.className}`}>
-        <AuthProvider>
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
-        </AuthProvider>
+        {/* Temporarily disabled AuthProvider to debug 503 error */}
+        {/* <AuthProvider> */}
+        <Navbar />
+        <main>{children}</main>
+        <Footer />
+        {/* </AuthProvider> */}
       </body>
     </html>
   );
