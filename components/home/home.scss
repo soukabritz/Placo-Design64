@@ -65,11 +65,37 @@
     margin-bottom: 1.2rem;
 
     h2 {
-      font-size: 2.2rem !important;
-      font-family: "Montserrat", sans-serif !important;
-      font-weight: 900 !important;
-      color: #333333 !important;
-      margin-bottom: 2rem !important;
+      font-size: 2rem !important;
+      font-weight: 700 !important;
+      color: #1c1c1c !important;
+      margin-bottom: 1.2rem !important;
+      line-height: 1.15;
+    }
+
+    b {
+      font-weight: 600;
+      color: #1c1c1c;
+    }
+
+    ul {
+      padding-left: 0;
+    }
+
+    li {
+      position: relative;
+      padding-left: 1rem;
+      margin-bottom: 0.45rem;
+    }
+
+    li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: $color-primary;
     }
 
     p,
@@ -81,7 +107,7 @@
     }
 
     ul {
-      padding-left: 1.2rem;
+      padding-left: 0;
       margin-bottom: 1rem;
     }
 
@@ -116,9 +142,9 @@
     img {
       width: 100%;
       display: block;
-      border-radius: 0 0 $border-radius-lg $border-radius-lg;
+      border-radius: 16px;
       object-fit: cover;
-      max-height: 200px;
+      max-height: 240px;
     }
   }
 }
@@ -144,13 +170,14 @@
   }
 
   .presentation-text {
-    flex: 1.2;
+    flex: 1 1 0;
+    min-width: 0;
     margin-bottom: 0;
-    padding-right: 2.5rem;
+    padding-right: 2rem;
 
     h2 {
-      font-size: 2rem;
-      margin-bottom: 2rem;
+      font-size: 2.15rem;
+      margin-bottom: 1.2rem;
     }
 
     p,
@@ -161,7 +188,7 @@
     }
 
     ul {
-      padding-left: 2.2rem !important;
+      padding-left: 0 !important;
       margin-bottom: 1.7rem;
     }
 
@@ -176,27 +203,43 @@
   }
 
   .presentation-image {
-    flex: 1;
+    flex: 1 1 0;
+    min-width: 0;
     display: flex;
-    align-items: center;
+    align-items: stretch;
     justify-content: flex-end;
     margin: 0;
 
-    img {
-      width: 420px;
-      max-width: 100%;
+    picture {
+      display: block;
+      width: 100%;
       height: 100%;
-      min-height: 320px;
-      border-radius: 0 $border-radius-lg $border-radius-lg 0;
+    }
+
+    img {
+      width: 100%;
+      max-width: none;
+      height: 100%;
+      min-height: 100%;
+      border-radius: 18px;
       object-fit: cover;
-      box-shadow: none;
+      object-position: center;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
     }
   }
 }
 
 @media (max-width: 767px) {
   .home-presentation {
-    margin-top: 0.2rem;
+    width: calc(100% - 2rem);
+    max-width: none;
+    margin: 1.8rem 1rem 0;
+    padding: 1.2rem 1rem;
+
+    .container {
+      padding: 0;
+      max-width: none;
+    }
   }
 
   .realisations-home-section {
@@ -214,53 +257,145 @@
 
 .home-title-block {
   width: 100%;
-  text-align: left;
-  padding: 5rem 0 3rem 0;
-  box-shadow: none;
-  border: none;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
   max-width: $container-max-width;
   margin: 0 auto;
-  padding-left: $spacing-lg;
-  padding-right: $spacing-lg;
+  padding: 2.4rem $spacing-lg 0.4rem;
+
+  .home-title-panel {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.6rem;
+    align-items: center;
+    background: transparent;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
+  }
+
+  .home-title-copy {
+    position: relative;
+    padding-left: 1rem;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.35rem;
+      bottom: 0.35rem;
+      width: 3px;
+      border-radius: 99px;
+      background: $color-primary;
+    }
+  }
 
   h1 {
-    font-family: "Montserrat", $font-family-primary, sans-serif;
-    font-size: 3.2rem;
-    font-weight: 900;
-    color: $color-text-primary;
-    margin-bottom: 2rem;
-    letter-spacing: -1px;
-    line-height: 1.13;
+    font-size: 1.85rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0 0 0.85rem;
+    letter-spacing: -0.035em;
+    line-height: 1.08;
     text-align: left;
-    word-break: break-word;
-    white-space: normal;
+    max-width: none;
   }
 
   .home-subtitle {
-    font-size: 1.25rem;
-    color: #757575;
+    font-size: 1rem;
+    color: #5a5a5a;
     margin: 0;
     line-height: 1.6;
     font-weight: 400;
     text-align: left;
-    word-break: break-word;
-    white-space: normal;
     max-width: none;
   }
 
+  .home-title-points {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    border-radius: 0;
+  }
+
+  .home-title-points li {
+    display: grid;
+    grid-template-columns: 2.6rem 1fr;
+    gap: 0.35rem 0.75rem;
+    align-items: center;
+    padding: 0.95rem 0;
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+
+    & + li {
+      border-top: 1px solid rgba(28, 28, 28, 0.08);
+    }
+  }
+
+  .home-title-index {
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    color: $color-primary;
+    line-height: 1;
+  }
+
+  .home-title-points strong {
+    display: block;
+    color: #1a1a1a;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.15rem;
+  }
+
+  .home-title-points li span:not(.home-title-index) {
+    display: block;
+    color: #6a6a6a;
+    font-size: 0.92rem;
+    line-height: 1.35;
+  }
+
+  @media (min-width: $breakpoint-lg) {
+    padding-top: 5rem;
+
+    .home-title-panel {
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      padding: 0;
+      align-items: stretch;
+    }
+
+    h1 {
+      font-size: 2.45rem;
+    }
+
+    .home-subtitle {
+      font-size: 1.08rem;
+    }
+
+    .home-title-points {
+      height: 100%;
+      padding: 0;
+      justify-content: space-between;
+    }
+
+    .home-title-index {
+      font-size: 1.35rem;
+    }
+  }
+
   @media (max-width: $breakpoint-md) {
-    padding: 2.5rem 1rem 1.5rem 1rem;
+    padding: 2.6rem 1rem 0.2rem;
 
     h1 {
       font-size: 1.7rem;
     }
 
-    .home-subtitle {
-      font-size: 1rem;
+    .home-title-points {
+      padding-left: 1rem;
     }
   }
 }

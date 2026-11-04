@@ -30,12 +30,11 @@
   width: 100%;
   height: 100%;
   background: linear-gradient(
-    135deg,
-    rgba($color-white, 0.35) -20%,
-    rgba($color-white, 0.65) 10%,
-    rgba($color-white, 0.9) 30%,
-    rgba($color-white, 0.9) 50%,
-    rgba($color-white, 0.25) 100%
+    105deg,
+    rgba(18, 14, 14, 0.82) 0%,
+    rgba(18, 14, 14, 0.58) 42%,
+    rgba(18, 14, 14, 0.22) 72%,
+    rgba(18, 14, 14, 0.08) 100%
   );
 }
 
@@ -43,11 +42,10 @@
   .hero-overlay {
     background: linear-gradient(
       180deg,
-      rgba($color-white, 0.3) 0%,
-      rgba($color-white, 0.7) 20%,
-      rgba($color-white, 0.95) 40%,
-      rgba($color-white, 0.95) 60%,
-      rgba($color-white, 0.3) 100%
+      rgba(18, 14, 14, 0.35) 0%,
+      rgba(18, 14, 14, 0.72) 28%,
+      rgba(18, 14, 14, 0.78) 62%,
+      rgba(18, 14, 14, 0.35) 100%
     );
   }
 }
@@ -87,25 +85,26 @@
 
 .hero-subtitle {
   font-size: $font-size-sm;
-  color: $color-text-secondary;
+  color: rgba($color-white, 0.82);
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 0.16em;
   font-weight: 600;
   margin-bottom: $spacing-base;
 }
 
 .hero-left h1 {
   font-size: $font-size-3xl;
-  color: $color-text-primary;
-  line-height: 1.2;
+  color: $color-white;
+  line-height: 1.08;
   font-weight: 700;
   margin-bottom: $spacing-base;
 }
 
 .hero-description {
   font-size: $font-size-lg;
-  color: $color-text-secondary;
-  line-height: 1.6;
+  color: rgba($color-white, 0.88);
+  line-height: 1.5;
+  font-weight: 400;
   margin-bottom: $spacing-lg;
 }
 
@@ -163,7 +162,7 @@
 a.phone-btn,
 button.phone-btn {
   background-color: transparent;
-  color: $color-text-primary;
+  color: $color-white;
   border: none;
   transition: $transition-base;
   border-radius: 50px;
@@ -183,10 +182,10 @@ button.phone-btn {
 
 a.phone-btn:hover,
 button.phone-btn:hover {
-  background-color: rgba($color-primary, 0.1);
+  background-color: rgba($color-white, 0.12);
   transform: translateY(-2px);
-  box-shadow: 0 4px 6px rgba($color-primary, 0.2);
-  color: $color-text-primary;
+  box-shadow: none;
+  color: $color-white;
   border: none;
 }
 

@@ -22,6 +22,15 @@
   box-sizing: border-box;
 }
 
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Inter", "Open Sans", sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
 body {
   background: #f5f6f8 !important;
   margin: 0;

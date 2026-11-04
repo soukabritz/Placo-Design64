@@ -31,23 +31,8 @@ const Presentation = () => (
             </li>
           </ul>
           <p>
-            Notre équipe vous accompagne de la <b>conception</b> à la{" "}
-            <b>réalisation</b>, en vous proposant des{" "}
-            <b>solutions personnalisées</b> et adaptées à vos besoins.
-          </p>
-          <br />
-          <p>
-            <b>
-              Que vous souhaitiez optimiser l'espace, moderniser votre intérieur
-              ou améliorer votre confort, chaque détail est pensé pour
-              simplifier votre quotidien.
-            </b>
-          </p>
-          <br />
-          <p>
-            Notre <b>savoir-faire</b> et notre <b>exigence de qualité</b> nous
-            permettent de transformer vos espaces en lieux de vie{" "}
-            <b>harmonieux</b>, <b>fonctionnels</b> et <b>esthétiques</b>.
+            De la conception à la réalisation, chaque projet est pensé pour
+            votre confort.
           </p>
           <a
             href="/contact"
