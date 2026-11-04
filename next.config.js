@@ -1,4 +1,16 @@
 const path = require("path");
+const copyStandaloneAssets = require("./scripts/copyStandaloneAssets");
+
+if (!global.__placoStandaloneCopy) {
+  global.__placoStandaloneCopy = true;
+  process.on("exit", () => {
+    try {
+      copyStandaloneAssets();
+    } catch (error) {
+      console.error("Copie des fichiers standalone impossible :", error);
+    }
+  });
+}
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
