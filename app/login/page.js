@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { useAuth } from "@/lib/contexts/AuthContext";
 import ReCAPTCHA from "react-google-recaptcha";
 import "./login.scss";
@@ -138,6 +139,9 @@ export default function LoginPage() {
           </div>
         )}
         <button type="submit">Se connecter</button>
+        <p className="login-links">
+          <Link href="/mot-de-passe-oublie">Mot de passe oublié ?</Link>
+        </p>
       </form>
     </div>
   );
