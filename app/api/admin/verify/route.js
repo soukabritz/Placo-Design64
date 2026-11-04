@@ -3,6 +3,19 @@ import connectDB from "@/lib/db/mongodb";
 import Admin from "@/lib/models/Admin";
 import { verifyAuth } from "@/lib/utils/auth";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
+function json(body, status = 200) {
+  return NextResponse.json(body, {
+    status,
+    headers: {
+      "Cache-Control": "private, no-store, max-age=0, must-revalidate",
+      Vary: "Cookie",
+    },
+  });
+}
+
 export async function GET(request) {
   try {
     console.log("[API Verify] GET request received");
@@ -15,7 +28,7 @@ export async function GET(request) {
         auth: auth,
         timestamp: new Date().toISOString(),
       });
-      return NextResponse.json({ message: "Non autorisé" }, { status: 401 });
+      return json({ message: "Non autorisé" }, 401);
     }
 
     console.log("[API Verify] User authenticated, fetching admin data");
@@ -29,14 +42,11 @@ export async function GET(request) {
         userId: auth.userId,
         timestamp: new Date().toISOString(),
       });
-      return NextResponse.json(
-        { message: "Admin non trouvé" },
-        { status: 401 },
-      );
+      return json({ message: "Admin non trouvé" }, 401);
     }
 
     console.log("[API Verify] Admin found and verified");
-    return NextResponse.json({
+    return json({
       isAuthenticated: true,
       admin: {
         email: admin.email,
@@ -50,9 +60,6 @@ export async function GET(request) {
       timestamp: new Date().toISOString(),
       name: error.name,
     });
-    return NextResponse.json(
-      { message: "Erreur serveur", details: error.message },
-      { status: 500 },
-    );
+    return json({ message: "Erreur serveur" }, 500);
   }
 }
