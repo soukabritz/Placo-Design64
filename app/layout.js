@@ -1,5 +1,5 @@
 import "@/styles/globals.scss";
-// import { AuthProvider } from "@/lib/contexts/AuthContext";
+import { AuthProvider } from "@/lib/contexts/AuthContext";
 import Navbar from "@/components/navigation/Navbar";
 import Footer from "@/components/navigation/Footer";
 
@@ -15,12 +15,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="fr" suppressHydrationWarning>
       <body>
-        {/* AuthProvider disabled until environment variables are configured */}
-        {/* <AuthProvider> */}
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
-        {/* </AuthProvider> */}
+        <AuthProvider>
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+        </AuthProvider>
       </body>
     </html>
   );
